@@ -1,13 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./../style/style.css">
 </head>
+
 <body>
-    
+    <nav class="navbar">
+        <div class="logo">MyApp</div>
+        <div class="menu-toggle" id="menuToggle">☰</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+        </div>
+    </nav>
+
+     <h1>Players Form</h1>
+    <form id="playerForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Player Name" required>
+
+        <label for="photo">Photo URL</label>
+        <input type="url" id="photo" name="photo" placeholder="https://example.com/photo.png" required>
+
+        <label for="position">Position</label>
+        <input type="text" id="position" name="position" placeholder=" GK,CB, RW, ST, CM" required>
+
+        <label for="nationality">Nationality</label>
+        <input type="text" id="nationality" name="nationality" placeholder="England, Argentina, Portugal" required>
+
+        <label for="flag">Flag URL</label>
+        <input type="url" id="flag" name="flag" placeholder="https://example.com/flag.png" required>
+
+        <label for="club">Club</label>
+        <input type="text" id="club" name="club" placeholder="Liverpool, Real Madrid " required>
+
+        <label for="logo">Club Logo URL</label>
+        <input type="url" id="logo" name="logo" placeholder="https://example.com/logo.png" required>
+
+        <label for="rating">Rating</label>
+        <input type="number" id="rating" name="rating" min="0" max="100" placeholder="  please enter rating" required>
+
+        <label for="pace">Pace</label>
+        <input type="number" id="pace" name="pace" min="0" max="100" placeholder="  please enter pace " required>
+
+        <label for="shooting">Shooting</label>
+        <input type="number" id="shooting" name="shooting" min="0" max="100" placeholder=" please enter shooting" required>
+
+        <label for="passing">Passing</label>
+        <input type="number" id="passing" name="passing" min="0" max="100" placeholder=" please enter passing" required>
+
+        <label for="dribbling">Dribbling</label>
+        <input type="number" id="dribbling" name="dribbling" min="0" max="100" placeholder=" please enter dribbling" required>
+
+        <label for="defending">Defending</label>
+        <input type="number" id="defending" name="defending" min="0" max="100" placeholder=" please enter defending" required>
+
+        <label for="physical">Physical</label>
+        <input type="number" id="physical" name="physical" min="0" max="100" placeholder=" please enter physical" required>
+
+        <button type="submit">Submit</button>
+    </form> 
+
+   
+
     <script src="script.js"></script>
 </body>
+
 </html>
