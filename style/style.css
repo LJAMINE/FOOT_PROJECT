@@ -2,37 +2,52 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
+
 form {
-    max-width: 600px;
+    max-width: 100%;
     margin: 0 auto;
-    position: absolute;
-    left: 43px;
+    
 }
+
 label {
     display: block;
     margin: 10px 0 5px;
 }
-input, select, button {
-    width: 100%;
+
+input,
+select,
+button {
+    width: 80%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+#clickme{
+    /* margin-left: 70px; */
+    text-align: center;
 }
 button {
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
+    /* margin-left: 60%; */
 }
+
 button:hover {
     background-color: #0056b3;
 }
 
-.playerForm{
+#playerForm {
+    padding: 10px;
+    margin-top:4% ;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
 }
-/* navbarr */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -41,39 +56,144 @@ button:hover {
     background-color: #007bff;
     color: white;
 }
+
 .navbar .logo {
     font-size: 1.5rem;
     font-weight: bold;
 }
+
 .navbar .nav-links {
     display: flex;
     gap: 20px;
 }
+
 .navbar .nav-links a {
     color: white;
     text-decoration: none;
     font-size: 1rem;
 }
+
 .navbar .nav-links a:hover {
     text-decoration: underline;
 }
+
 @media (max-width: 768px) {
     .navbar .nav-links {
         flex-direction: column;
         align-items: flex-start;
         display: none;
     }
+
     .navbar .nav-links.active {
         display: flex;
     }
+
     .navbar .menu-toggle {
         display: block;
         cursor: pointer;
     }
 }
+
 .menu-toggle {
     display: none;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
 }
+
+
+
+
+
+img {
+    width: 77%;
+}
+
+.terrain {
+    border: 1px solid blue;
+  /* width: 90%; */
+  
+    background-image: url("./../assets/images/stadium_background.webp") ;
+    background-position:center;
+    background-repeat: no-repeat;
+    /* object-fit: contain; */
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+.attaque {
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 10%; */
+
+}
+a{
+    color: white;
+}
+
+.milieu {
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 5%; */
+
+}
+
+.defence {
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 10%; */
+
+}
+
+.goalKeeper {
+    display: flex;
+    justify-content: center;
+    gap: 30%; 
+
+}
+
+.images{
+    padding: 2%;
+    font-size: 2rem;
+    color: white;
+    height: 300px;
+    width: 200px;
+    background: url("./../assets/images/badge_total_rush.webp") ;
+    background-position:center;
+    background-repeat: no-repeat;
+    object-fit: cover;  border-radius: 20px;
+
+
+
+}
+
+.drawar{
+    display: none;
+    position: absolute;
+    /* left: 97%; */
+    right: 0%; /* Fully off-screen initially */
+
+    width: 800px;
+    height: 600px;
+    background-color: beige;
+ }
+
+ #clickme{
+    width: 80px;
+    
+ }
+ #closeme{
+    width: 100px;
+    background-color: red;
+ }
+ .remplacent{
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+ }
+ .clickremplacent{
+
+ }
