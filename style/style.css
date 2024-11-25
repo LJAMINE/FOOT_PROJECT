@@ -153,47 +153,103 @@ a{
 
 }
 
-.images{
-    padding: 2%;
-    font-size: 2rem;
+
+.images {
+    padding: 10px;
+    font-size: 1rem;
     color: white;
     height: 300px;
     width: 200px;
-    background: url("./../assets/images/badge_total_rush.webp") ;
-    background-position:center;
+    background: url("./../assets/images/badge_total_rush.webp");
+    background-position: center;
     background-repeat: no-repeat;
-    object-fit: cover;  border-radius: 20px;
-
-
-
+    background-size: cover;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.drawar{
+.images:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.images p {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.images img {
+    max-width: 80%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.drawar {
     display: none;
-    position: absolute;
-    /* left: 97%; */
-    right: 0%; /* Fully off-screen initially */
-
-    width: 800px;
-    height: 600px;
+    position: fixed;
+    right: 10%;
+    top: 10%;
+    width: 60%;
+    height: 80%;
     background-color: beige;
- }
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow-y: auto;
+    padding: 20px;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+}
 
- #clickme{
-    width: 80px;
-    
- }
- #closeme{
-    width: 100px;
-    background-color: red;
- }
- .remplacent{
+.drawar.active {
+    display: block;
+    transform: translateX(0);
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#stockLW {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#stockLW p, #stockLW img {
+    margin: 0;
+    text-align: center;
+}
+.remplacent{
 
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 10px;
+    margin: 5px;
 
  }
- .clickremplacent{
 
- }
