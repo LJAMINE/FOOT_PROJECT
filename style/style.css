@@ -1,6 +1,23 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
+    
+}
+/* .gridcontainer{
+    width: 60%;
+    height: 80%;
+} */
+.bigcontainer{
+    background-image: url("./../assets/images/amu.jpg"); background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+.remplccent{
+    margin-top:20px ;
+    border: 5px solid black;
 }
 
 form {
@@ -15,15 +32,21 @@ label {
 }
 
 input,
-select,
-button {
-    width: 80%;
+select{
+    /* width: 50%; */
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
+#closeme{
+    background-color: red;
+    width: 26%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 #clickme {
     /* margin-left: 70px; */
     text-align: center;
@@ -42,12 +65,15 @@ button:hover {
 }
 
 #playerForm {
-    padding: 10px;
-    margin-top: 4%;
+    /* padding: 10px; */
+    /* margin-top: 4%; */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-
+    column-gap: 10px;
+    row-gap: 8px;
 }
+
+
 
 .navbar {
     display: flex;
@@ -112,14 +138,13 @@ img {
 
 .terrain {
     border: 1px solid blue;
-    /* width: 90%; */
 
     background-image: url("./../assets/images/stadium_background.webp");
     background-position: center;
     background-repeat: no-repeat;
     /* object-fit: contain; */
     background-size: cover;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
 
 }
 
@@ -162,7 +187,7 @@ a {
     color: black;
     height: 300px;
     width: 200px;
-    background: url("./../assets/images/badge_gold.webp");
+    background: url("./../assets/images/PRO-PLAYER-WEB-T22-min-768x1073.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -265,8 +290,8 @@ h6 {
 }
 
 #myStockLw {
-    width: 102%;
-    height: 61%;
+    /* width: 102%; */
+    height: 67%;
 
 
 }
@@ -288,8 +313,7 @@ h6 {
     gap: 1rem;
     height: 30px;
     width: 50px;
-    /* display: grid;
-    grid-template-columns: repeat(2, 1fr); */
+    
 }
 
 #leftinfo {
