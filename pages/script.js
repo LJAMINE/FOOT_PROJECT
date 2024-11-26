@@ -36,52 +36,30 @@ function getData() {
     return arrayTable;
 }
 
-let stockLW = document.getElementById("stockLW")
+let myStockLw = document.getElementById("myStockLw")
 submitButton.addEventListener("click", function (event) {
     event.preventDefault()
 
     getData()
-    li = document.createElement("p")
+   let  li = document.createElement("p")
     li.innerText = arrayTable[7]
-    stockLW.appendChild(li)
+    myStockLw.appendChild(li)
 
 
 
     let img = document.createElement("img");
     img.src = arrayTable[3];
-    stockLW.appendChild(img);
+    myStockLw.appendChild(img);
 
 
     li = document.createElement("p")
     li.innerText = arrayTable[0]
-    stockLW.appendChild(li)
+    myStockLw.appendChild(li)
 
 
 
 })
 
-let stockST = document.getElementById("stockST")
-submitButton.addEventListener("click", function (event) {
-    event.preventDefault()
+// 
 
-    getData()
-    li = document.createElement("p")
-    li.innerText = arrayTable[7]
-    stockST.appendChild(li)
-
-
-
-    let img = document.createElement("img");
-    img.src = arrayTable[3];
-    stockST.appendChild(img);
-
-
-    li = document.createElement("p")
-    li.innerText = arrayTable[0]
-    stockST.appendChild(li)
-
-
-
-})
-
-//problem baecoup de player , for alors (for ola for each player , m3a idee ta3 id pour kola player )
+//problem baecoup de player ,  alors (for ola for each player , m3a idee ta3 id pour kola player )
