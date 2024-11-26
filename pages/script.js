@@ -31,35 +31,77 @@ function getData() {
     let defending = document.getElementById("defending").value
     let physical = document.getElementById("physical").value
 
-    arrayTable = [nameInput, flag, nationality, photo, positionPlayer, club, logo, rating, pace, shooting, passing, dribbling, defending, physical];
+    arrayTable = [nameInput, flag, nationality, photo, positionPlayer,club,logo, rating, pace, shooting, passing, dribbling, defending, physical];
     console.log(arrayTable);
     return arrayTable;
 }
 
-let myStockLw = document.getElementById("myStockLw")
+let nameofPlayer = document.getElementById("nameofPlayer")
+let myplayerImage = document.getElementById("myplayerImage")
+// let stats = document.getElementById("stats")
+let statsRight = document.getElementById("statsRight")
+let statsleft = document.getElementById("statsleft")
+let ratingss = document.getElementById("ratingss")
+let flagss = document.getElementById("flagss")
+
+
+
 submitButton.addEventListener("click", function (event) {
     event.preventDefault()
 
     getData()
-   let  li = document.createElement("p")
-    li.innerText = arrayTable[7]
-    myStockLw.appendChild(li)
-
-
-
     let img = document.createElement("img");
     img.src = arrayTable[3];
-    myStockLw.appendChild(img);
+    myplayerImage.appendChild(img);
 
+
+    let li = document.createElement("p")
+    li.innerText = arrayTable[0]
+    nameofPlayer.appendChild(li)
 
     li = document.createElement("p")
-    li.innerText = arrayTable[0]
-    myStockLw.appendChild(li)
+    li.innerText = `${arrayTable[7]}`
+    ratingss.appendChild(li)
+
+    let pace = document.createElement("h6")
+    pace.innerText = `PAC:${arrayTable[8]}`
+    statsRight.appendChild(pace)
+
+    let shoot = document.createElement("h6")
+    shoot.innerText = `SHO:${arrayTable[9]}`
+    statsRight.appendChild(shoot)
+
+    let pass = document.createElement("h6")
+    pass.innerText = `PAS:${arrayTable[10]}`
+    statsRight.appendChild(pass)
 
 
+    let dribbling = document.createElement("h6")
+    dribbling.innerText = `DRI:${arrayTable[11]}`
+    statsleft.appendChild(dribbling)
+
+    let defence = document.createElement("h6")
+    defence.innerText = `DEF:${arrayTable[12]}`
+    statsleft.appendChild(defence)
+
+    let physical = document.createElement("h6")
+    physical.innerText = `PHY:${arrayTable[13]}`
+    statsleft.appendChild(physical)
+
+   
+
+    let flagcountry = document.createElement("img");
+    flagcountry.src = arrayTable[1];
+    flagss.appendChild(flagcountry);
+
+    let clubequipe = document.createElement("img");
+    clubequipe.src = arrayTable[6];
+    flagss.appendChild(clubequipe);
+
+     
 
 })
 
-// 
+//
 
 //problem baecoup de player ,  alors (for ola for each player , m3a idee ta3 id pour kola player )

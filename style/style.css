@@ -6,7 +6,7 @@ body {
 form {
     max-width: 100%;
     margin: 0 auto;
-    
+
 }
 
 label {
@@ -24,10 +24,11 @@ button {
     border-radius: 5px;
 }
 
-#clickme{
+#clickme {
     /* margin-left: 70px; */
     text-align: center;
 }
+
 button {
     background-color: #007bff;
     color: white;
@@ -42,7 +43,7 @@ button:hover {
 
 #playerForm {
     padding: 10px;
-    margin-top:4% ;
+    margin-top: 4%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
@@ -111,15 +112,15 @@ img {
 
 .terrain {
     border: 1px solid blue;
-  /* width: 90%; */
-  
-    background-image: url("./../assets/images/stadium_background.webp") ;
-    background-position:center;
+    /* width: 90%; */
+
+    background-image: url("./../assets/images/stadium_background.webp");
+    background-position: center;
     background-repeat: no-repeat;
     /* object-fit: contain; */
     background-size: cover;
     background-attachment: fixed;
-    
+
 }
 
 .attaque {
@@ -128,7 +129,8 @@ img {
     /* margin-bottom: 10%; */
 
 }
-a{
+
+a {
     color: white;
 }
 
@@ -149,7 +151,7 @@ a{
 .goalKeeper {
     display: flex;
     justify-content: center;
-    gap: 30%; 
+    gap: 30%;
 
 }
 
@@ -157,10 +159,10 @@ a{
 .images {
     padding: 10px;
     font-size: 1rem;
-    color: white;
+    color: black;
     height: 300px;
     width: 200px;
-    background: url("./../assets/images/badge_total_rush.webp");
+    background: url("./../assets/images/badge_gold.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -181,19 +183,15 @@ a{
 }
 
 .images p {
-    background: rgba(0, 0, 0, 0.5);
-    width: 100%;
+
     text-align: center;
-    margin: 0;
-    padding: 5px;
-    font-size: 1.2rem;
-    font-weight: bold;
+
 }
 
 .images img {
     max-width: 80%;
-    border-radius: 10px;
-    margin-top: 10px;
+    /* border-radius: 10px;
+    margin-top: 10px; */
 }
 
 .drawar {
@@ -239,11 +237,13 @@ button:hover {
     gap: 10px;
 }
 
-#stockLW p, #stockLW img {
+#stockLW p,
+#stockLW img {
     margin: 0;
     text-align: center;
 }
-.remplacent{
+
+.remplacent {
 
     display: flex;
     justify-content: space-between;
@@ -251,5 +251,49 @@ button:hover {
     gap: 10px;
     margin: 5px;
 
- }
+}
+
+#stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 12%;
+
+}
+
+h6 {
+    font-size: 6px;
+}
+
+#myStockLw {
+    width: 102%;
+    height: 61%;
+
+
+}
+
+#imagerating {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* padding: 24%; */
+}
+
+#nameofPlayer p {
+    font-size: 10px;
+}
+
+
+#flagss {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 30px;
+    width: 50px;
+    /* display: grid;
+    grid-template-columns: repeat(2, 1fr); */
+}
+
+#leftinfo {
+    display: flex;
+    flex-direction: column;
+}
 
