@@ -1,16 +1,18 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    
+
 }
-.gridcontainer{
+
+.gridcontainer {
     /* width: 70%;
     height: 60%; */
-    width: 60%;
+    /* width: 60%;
     padding: 20px;
-        height: 60%;
+    height: 60%; */
 }
-.bigcontainer{
+
+.bigcontainer {
     /* background-image: url("./../assets/images/amu.jpg"); background-position: center; */
     /* background-repeat: no-repeat;
     object-fit: cover;
@@ -20,8 +22,9 @@ body {
     width: 80%; */
 
 }
-.remplccent{
-    margin-top:20px ;
+
+.remplccent {
+    margin-top: 20px;
     border: 5px solid black;
 }
 
@@ -37,22 +40,15 @@ label {
 }
 
 input,
-select{
+select {
     /* width: 50%; */
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-#closemeGK{
-    background-color: red;
-        width: 26%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-}
-#closeme{
+
+#closemeGK {
     background-color: red;
     width: 26%;
     padding: 10px;
@@ -60,6 +56,16 @@ select{
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+#closeme {
+    background-color: red;
+    width: 26%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 #clickme {
     /* margin-left: 70px; */
     text-align: center;
@@ -164,7 +170,7 @@ img {
 .attaque {
     display: flex;
     justify-content: space-between;
-    /* margin-bottom: 10%; */
+    margin-bottom: 10%;
 
 }
 
@@ -175,14 +181,14 @@ a {
 .milieu {
     display: flex;
     justify-content: space-between;
-    /* margin-bottom: 5%; */
+    margin-bottom: 5%;
 
 }
 
 .defence {
     display: flex;
     justify-content: space-between;
-    /* margin-bottom: 10%; */
+    margin-bottom: 10%;
 
 }
 
@@ -198,7 +204,7 @@ a {
     font-size: 1rem;
     color: black;
     height: 200px;
-    width: 173px;
+    width: 193px;
     background: url("./../assets/images/badge_gold.webp");
     background-position: center;
     background-repeat: no-repeat;
@@ -272,6 +278,7 @@ a {
     display: block;
     transform: translateX(0);
 }
+
 button {
     background-color: #007bff;
     color: white;
@@ -346,7 +353,7 @@ h6 {
     gap: 1rem;
     height: 30px;
     width: 50px;
-    
+
 }
 
 #leftinfo {
@@ -375,11 +382,10 @@ h6 {
 #stats {
     display: flex;
     justify-content: space-between;
-    padding: 1%;
+    padding: 8%;
 
 }
 
 h6 {
     font-size: 6px;
 }
-

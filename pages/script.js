@@ -21,63 +21,71 @@ let arrayTable;
 
 function getData() {
 
-    
+
     let playerData = {
-         nameInput: document.getElementById("name").value,
-         nationality: document.getElementById("nationality").value,
-         photo: document.getElementById("photo").value,
-         flag: document.getElementById("flag").value,
-         positionPlayer: document.getElementById("positionPlayer").value,
-         club: document.getElementById("club").value,
+        nameInput: document.getElementById("name").value,
+        nationality: document.getElementById("nationality").value,
+        photo: document.getElementById("photo").value,
+        flag: document.getElementById("flag").value,
+        positionPlayer: document.getElementById("positionPlayer").value,
+        club: document.getElementById("club").value,
         logo: document.getElementById("logo").value,
-         
-         rating: document.getElementById("rating").value,
-         pace: document.getElementById("pace").value,
-         shooting: document.getElementById("shooting").value,
-         passing: document.getElementById("passing").value,
-         dribbling: document.getElementById("dribbling").value,
-         defending: document.getElementById("defending").value,
-         physical: document.getElementById("physical").value
+
+        rating: document.getElementById("rating").value,
+        pace: document.getElementById("pace").value,
+        shooting: document.getElementById("shooting").value,
+        passing: document.getElementById("passing").value,
+        dribbling: document.getElementById("dribbling").value,
+        defending: document.getElementById("defending").value,
+        physical: document.getElementById("physical").value
     }
 
 
     console.log(playerData);
     return playerData;
 
-   
+
 }
 
 submitButton.addEventListener("click", function (event) {
     event.preventDefault();
     let playerData = getData();
+    function isValidUrl(value) {
+        try {
+            new URL(value);  
+            return true;
+        } catch {
+            return false;  
+        }
+    }
 
     if (
         playerData.nameInput !== "" &&
         playerData.nationality !== "" &&
-        playerData.logo !== "" &&
-        playerData.flag !== "" &&
+        isValidUrl(playerData.logo) &&
+        isValidUrl(playerData.flag) &&
         playerData.club !== "" &&
-        playerData.photo !== "" &&
+        isValidUrl(playerData.photo) &&
         playerData.positionPlayer !== "" &&
-        playerData.rating !== "" &&
-        playerData.physical !== "" &&
-        playerData.shooting !== "" &&
-        playerData.defending !== "" &&
-        playerData.pace !== "" &&
-        playerData.passing !== "" &&
-        playerData.dribbling !== "" 
+        (playerData.rating !== "" && playerData.rating > 0 && playerData.rating < 100) &&
+        (playerData.physical !== "" && playerData.physical > 0 && playerData.physical < 100) &&
+        (playerData.shooting !== "" && playerData.shooting > 0 && playerData.shooting < 100) &&
+        (playerData.defending !== "" && playerData.defending > 0 && playerData.defending < 100) &&
+        (playerData.pace !== "" && playerData.pace > 0 && playerData.pace < 100) &&
+        (playerData.passing !== "" && playerData.passing > 0 && playerData.passing < 100) &&
+        (playerData.dribbling !== "" && playerData.dribbling > 0 && playerData.dribbling < 100) 
 
     ) {
-        
+
         const selectedPositionCard = document.getElementById(currentPosition);
-    
+
         const playerImageContainer = selectedPositionCard.querySelector(`#myplayerImage`);
         const statsRight = selectedPositionCard.querySelector(`#statsRight`);
         const statsLeft = selectedPositionCard.querySelector(`#statsleft`);
         const ratings = selectedPositionCard.querySelector(`#ratingss`);
         const flagContainer = selectedPositionCard.querySelector(`#flagss`);
         const nameContainer = selectedPositionCard.querySelector(`#nameofPlayer`);
-    
+
         // "" vide
         playerImageContainer.innerText = '';
         statsRight.innerText = '';
@@ -85,51 +93,51 @@ submitButton.addEventListener("click", function (event) {
         ratings.innerText = '';
         flagContainer.innerText = '';
         nameContainer.innerText = '';
-    
+
         let img = document.createElement("img");
         img.src = playerData.photo;
         playerImageContainer.appendChild(img);
-    
+
         let myName = document.createElement("p");
         myName.innerText = playerData.nameInput;
         nameContainer.appendChild(myName);
-    
+
         let myRating = document.createElement("p");
         myRating.innerText = `Rating: ${playerData.rating}`;
         ratings.appendChild(myRating);
-    
+
         let pace = document.createElement("h6");
         pace.innerText = `PAC: ${playerData.pace}`;
         statsRight.appendChild(pace);
-    
+
         let shoot = document.createElement("h6");
         shoot.innerText = `SHO: ${playerData.shooting}`;
         statsRight.appendChild(shoot);
-    
+
         let pass = document.createElement("h6");
         pass.innerText = `PAS: ${playerData.passing}`;
         statsRight.appendChild(pass);
-    
+
         let dribbling = document.createElement("h6");
         dribbling.innerText = `DRI: ${playerData.dribbling}`;
         statsLeft.appendChild(dribbling);
-    
+
         let defence = document.createElement("h6");
         defence.innerText = `DEF: ${playerData.defending}`;
         statsLeft.appendChild(defence);
-    
+
         let physical = document.createElement("h6");
         physical.innerText = `PHY: ${playerData.physical}`;
         statsLeft.appendChild(physical);
-    
+
         let flagCountry = document.createElement("img");
         flagCountry.src = playerData.flag;
         flagContainer.appendChild(flagCountry);
-    
+
         let clubLogo = document.createElement("img");
         clubLogo.src = playerData.logo;
         flagContainer.appendChild(clubLogo);
-    
+
         drawar.style.display = "none";
         playerForm.reset();
     } else {
@@ -193,8 +201,8 @@ submitButtonGK.addEventListener("click", function (event) {
     let statsleft = document.getElementById("statsleft")
     let ratingss = document.getElementById("ratingss")
     let flagss = document.getElementById("flagss")
-    
-    
+
+
     getDataGK()
     let img = document.createElement("img");
     img.src = arrayTable[3];
@@ -238,7 +246,7 @@ submitButtonGK.addEventListener("click", function (event) {
     statsleft.appendChild(reflexes)
     console.log(statsleft);
 
-    
+
 
     let speed = document.createElement("h6")
     speed.innerText = `SPE:${arrayTable[12]}`
@@ -269,4 +277,3 @@ submitButtonGK.addEventListener("click", function (event) {
 
 
 })
-
