@@ -196,6 +196,13 @@ a {
     display: flex;
     justify-content: center;
 
+
+}
+
+#newDiv {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 
