@@ -184,10 +184,9 @@
             <div class="terrain">
                 <div class="attaque">
                     <div id="LW" class="images">
-
                         <div id="myStockLw">
-
-
+                    
+                    
                             <div id="imagerating">
                                 <div id="myplayerImage"></div>
                                 <div id="leftinfo">
@@ -195,14 +194,14 @@
                                     <div id="flagss"></div>
                                 </div>
                             </div>
-
+                    
                             <div id="nameofPlayer"> </div>
                             <div id="stats">
                                 <div id="statsRight"></div>
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        LW <button class="addButton" player-post="LW">add </button>
+                        <div id="remplacenPosition"></div> <button class="addButton" player-post="LW">add <div></div></button>
                     </div>
 
                     <div id="ST" class="images">
@@ -223,7 +222,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div></div>ST <button class="addButton" player-post="ST">add <div></div></button>
+                        <div id="remplacenPosition"></div> <button class="addButton" player-post="ST">add <div></div></button>
                     </div>
                     <div id="RW" class="images">
                         <div id="myStockLw">
@@ -243,7 +242,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div></div>RW <button class="addButton" player-post="RW">add</button>
+                        <div id="remplacenPosition"></div> <button class="addButton" player-post="RW">add</button>
                     </div>
 
                 </div>
@@ -269,7 +268,7 @@
                         </div>
                         <div>
 
-                        </div>LM <button class="addButton" player-post="LM">add</button>
+                        </div id="remplacenPosition"> <button class="addButton" player-post="LM">add</button>
                     </div>
                     <div id="CM" class="images">
                         <div id="myStockLw">
@@ -289,7 +288,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div></div>CM <button class="addButton" player-post="CM">add</button>
+                        <div id="remplacenPosition"></div> <button class="addButton" player-post="CM">add</button>
                     </div>
                     <div id="RM" class="images">
                         <div id="myStockLw">
@@ -309,7 +308,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div></div>RM <button class="addButton" player-post="RM">add</button>
+                        <div id="remplacenPosition"></div> <button class="addButton" player-post="RM">add</button>
                     </div>
 
                 </div>
@@ -333,7 +332,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div></div>LB <button class="addButton" player-post="LB">add</button>
+                        <div id="remplacenPosition"></div> <button class="addButton" player-post="LB">add</button>
                     </div>
                     <div id="CBL" class="images">
                         <div id="myStockLw">
@@ -353,7 +352,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div></div>CBL <button class="addButton" player-post="CBL">add</button>
+                        <div id="remplacenPosition"></div>  <button class="addButton" player-post="CBL">add</button>
                     </div>
                     <div id="CBR" class="images">
                         <div id="myStockLw">
@@ -374,7 +373,7 @@
                             </div>
                         </div>
 
-                        <div></div>CBR <button class="addButton" player-post="CBR">add</button>
+                        <div id="remplacenPosition"></div>  <button class="addButton" player-post="CBR">add</button>
                     </div>
                     <div id="RB" class="images">
                         <div id="myStockLw">
@@ -394,7 +393,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div></div>RB <button class="addButton" player-post="RB">add</button>
+                        <div id="remplacenPosition"></div> <button class="addButton" player-post="RB">add</button>
                     </div>
                 </div>
 
@@ -418,9 +417,11 @@
                             </div>
                         </div>
 
-                        <div id="newDiv">
+                        <!-- <div id="newDiv">
                             GK <button class="clickGK" player-post="GK">add</button>
-                        </div>
+                        </div> -->
+                                        <div id="remplacenPositionGK"></div> <button class="clickGK" player-post="remplacent1">add</button>
+
                     </div>
                 </div>
 
@@ -434,23 +435,74 @@
 
 
         <div class="remplccent">
-            <h1>remplacent</h1>
+            <!-- <h1>remplacent</h1> -->
+
+            <div id="remplacent1" class="images">
+                <div id="myStockLw">
 
 
-            <div class="remplacent">
-                <div id="" class="images"> <button class="clickme">add</button></div>
-                <div id=" " class="images"> <button class="clickme">add</button></div>
-                <div id=" " class="images"> <button class="clickme">add</button></div>
-                <div id=" " class="images"> <button class="clickme">add</button></div>
-                <div id=" " class="images"> <button class="clickme">add</button></div>
-                <div id=" " class="images"> <button class="clickme">add</button></div>
-                <div id=" " class="images"> <button class="clickme">add</button></div>
-                <div id=" " class="images"> <button class="clickme">add</button></div>
+                    <div id="imagerating">
+                        <div id="myplayerImage"></div>
+                        <div id="leftinfo">
+                            <div id="ratingss"> </div>
+                            <div id="flagss"></div>
+                        </div>
+                    </div>
 
+                    <div id="nameofPlayer"> </div>
+                    <div id="stats">
+                        <div id="statsRight"></div>
+                        <div id="statsleft"></div>
+                    </div>
+                </div>
+                <div id="remplacenPosition"></div> <button class="addButton" player-post="remplacent1">add</button>
+            </div>
+            <div id="remplacent2" class="images">
+                <div id="myStockLw">
+
+
+                    <div id="imagerating">
+                        <div id="myplayerImage"></div>
+                        <div id="leftinfo">
+                            <div id="ratingss"> </div>
+                            <div id="flagss"></div>
+                        </div>
+                    </div>
+
+                    <div id="nameofPlayer"> </div>
+                    <div id="stats">
+                        <div id="statsRight"></div>
+                        <div id="statsleft"></div>
+                    </div>
+                </div>
+                <div id="remplacenPosition"></div> <button class="addButton" player-post="remplacent2">add</button>
+            </div>
+            <div id="remplacent3" class="images">
+                <div id="myStockLw">
+
+
+                    <div id="imagerating">
+                        <div id="myplayerImage"></div>
+                        <div id="leftinfo">
+                            <div id="ratingss"> </div>
+                            <div id="flagss"></div>
+                        </div>
+                    </div>
+
+                    <div id="nameofPlayer"> </div>
+                    <div id="stats">
+                        <div id="statsRight"></div>
+                        <div id="statsleft"></div>
+                    </div>
+                </div>
+                <div id="remplacenPosition"></div> <button class="addButton" player-post="remplacent3">add</button>
             </div>
 
 
         </div>
+
+
+    </div>
 
 
     </div>

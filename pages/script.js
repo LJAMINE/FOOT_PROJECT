@@ -10,7 +10,7 @@ const closemeGK = document.getElementById("closemeGK");
 const drawarGK = document.querySelector(".drawarGK");
 
 let currentPosition = "";
-
+// ------------------------empty----------------------
 
 function clearCardData(card) {
     card.querySelector("#myplayerImage").innerText = "";
@@ -19,7 +19,12 @@ function clearCardData(card) {
     card.querySelector("#ratingss").innerText = "";
     card.querySelector("#flagss").innerText = "";
     card.querySelector("#nameofPlayer").innerText = "";
+    card.querySelector("#remplacenPosition").innerText = "";
 }
+// ------------------------empty----------------------
+
+// ------------------------function info first function----------------------
+
 
 function updateCardData(card, playerData, stats) {
     const playerImageContainer = card.querySelector("#myplayerImage");
@@ -34,6 +39,14 @@ function updateCardData(card, playerData, stats) {
     const nameElement = document.createElement("p");
     nameElement.innerText = playerData.name;
     nameContainer.appendChild(nameElement);
+
+    // positionn
+    const positionn = card.querySelector("#remplacenPosition");
+    positionn.innerText = "";
+    const positionElement = document.createElement("p");
+    positionElement.innerText = ` ${playerData.positionPlayer}`;
+    positionn.appendChild(positionElement);
+
 
     // Rating
     const ratings = card.querySelector("#ratingss");
@@ -69,10 +82,14 @@ function updateCardData(card, playerData, stats) {
     flagContainer.appendChild(logo);
 }
 
+// ------------------------ end function info first ----------------------
+// ------------------------function players----------------------
+
 
 addButton.forEach(button => {
     button.addEventListener("click", (event) => {
         currentPosition = event.target.getAttribute("player-post");
+        console.log(currentPosition)
         drawar.style.display = "block";
     });
 });
@@ -111,6 +128,9 @@ submitButton.addEventListener("click", (event) => {
     }
 });
 
+// ------------------------ end function players----------------------
+
+
 // ------------------------------------GK----------------------------------
 
 clickGK.addEventListener("click", (event) => {
@@ -147,10 +167,60 @@ submitButtonGK.addEventListener("click", (event) => {
         updateCardData(selectedPositionCard, goalkeeperData, stats);
         drawarGK.style.display = "none";
     } else {
-        alert("Please entrer tout correctly.");
+        alert("Please entrer tout correct.");
     }
 });
 
+// ------------------------------------ end GK----------------------------------
+
+
+
+
+// -------------------------start remplacent-----------------------------
+
+clickGK.addEventListener("click", (event) => {
+    currentPosition = event.target.getAttribute("player-post");
+
+    drawarGK.style.display = "block";
+});
+
+closemeGK.addEventListener("click", () => {
+    drawarGK.style.display = "none";
+});
+
+submitButtonGK.addEventListener("click", (event) => {
+    event.preventDefault();
+    const goalkeeperData = getGoalkeeperData();
+
+    if (isGoalkeepeinfoValid(goalkeeperData)) {
+        const selectedPositionCard = document.getElementById(currentPosition);
+
+        const stats = {
+            left: [
+                { label: "DIV", value: goalkeeperData.diving },
+                { label: "HAN", value: goalkeeperData.handling },
+                { label: "KIC", value: goalkeeperData.kicking }
+            ],
+            right: [
+                { label: "REF", value: goalkeeperData.reflexes },
+                { label: "SPE", value: goalkeeperData.speed },
+                { label: "POS", value: goalkeeperData.positioning }
+            ]
+        };
+
+        clearCardData(selectedPositionCard);
+        updateCardData(selectedPositionCard, goalkeeperData, stats);
+        drawarGK.style.display = "none";
+    } else {
+        alert("Please entrer tout correct.");
+    }
+});
+
+
+//-----------------end remplacent------------
+
+
+// --------------helper fonction-----------------------------------------------------------
 
 function getPlayerData() {
     return {
@@ -158,6 +228,7 @@ function getPlayerData() {
         photo: document.getElementById("photo").value,
         flag: document.getElementById("flag").value,
         positionPlayer: document.getElementById("positionPlayer").value,
+
         club: document.getElementById("club").value,
         logo: document.getElementById("logo").value,
         rating: document.getElementById("rating").value,
@@ -170,12 +241,15 @@ function getPlayerData() {
     };
 }
 
+
 function getGoalkeeperData() {
     return {
         name: document.getElementById("nameGK").value,
         photo: document.getElementById("photoGK").value,
         flag: document.getElementById("flagGK").value,
         club: document.getElementById("clubGK").value,
+        positionPlayer: document.getElementById("positionPlayer").value,
+
         logo: document.getElementById("logoGK").value,
         rating: document.getElementById("ratingGK").value,
         diving: document.getElementById("diving").value,
