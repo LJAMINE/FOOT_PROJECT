@@ -194,6 +194,7 @@ submitButtonGK.addEventListener("click", (event) => {
 
     if (isGoalkeepeinfoValid(goalkeeperData)) {
         const selectedPositionCard = document.getElementById(currentPosition);
+        console.log(currentPosition)
 
         const stats = {
             left: [
