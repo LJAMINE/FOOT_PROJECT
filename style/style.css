@@ -1,32 +1,22 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-
+    background: linear-gradient(to bottom, #0E1E5B, #091442);
 }
 
-.gridcontainer {
-    /* width: 70%;
-    height: 60%; */
-    /* width: 60%;
-    padding: 20px;
-    height: 60%; */
-}
+
 
 .bigcontainer {
-    /* background-image: url("./../assets/images/amu.jpg"); background-position: center; */
-    /* background-repeat: no-repeat;
-    object-fit: cover;
-    background-size: cover;
-    background-attachment: fixed; */
-    /* height: 80%;
-    width: 80%; */
-
+    
 }
 
 .remplccent {
-    margin-top: 20px;
-    border: 5px solid black;display: flex;
-        justify-content: space-between;
+    margin-top: 3%;
+    border: 4px solid black;
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+    flex-wrap: wrap;
 }
 
 form {
@@ -41,12 +31,19 @@ label {
 }
 
 input,
-select {
-    /* width: 50%; */
+select,
+button {
+    width: 80%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    width: 50%;
 }
 
 #closemeGK {
@@ -68,7 +65,6 @@ select {
 }
 
 #clickme {
-    /* margin-left: 70px; */
     text-align: center;
 }
 
@@ -77,7 +73,6 @@ button {
     color: white;
     border: none;
     cursor: pointer;
-    /* margin-left: 60%; */
 }
 
 button:hover {
@@ -85,8 +80,7 @@ button:hover {
 }
 
 #playerForm {
-    /* padding: 10px; */
-    /* margin-top: 4%; */
+
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
@@ -162,16 +156,16 @@ img {
     background-image: url("./../assets/images/stadium_background.webp");
     background-position: center;
     background-repeat: no-repeat;
-    /* object-fit: contain; */
     background-size: cover;
-    /* background-attachment: fixed; */
 
 }
 
 .attaque {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10%;margin-top: 10%;
+    margin-bottom: 10%;
+    margin-top: 10%;
+    padding: 11px;
 
 }
 
@@ -183,6 +177,7 @@ a {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5%;
+    padding: 11px;
 
 }
 
@@ -190,6 +185,7 @@ a {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10%;
+    padding: 11px;
 
 }
 
@@ -211,10 +207,10 @@ a {
 .images {
     padding: 10px;
     font-size: 1rem;
-    color: black;
-    height: 200px;
+    color: white;
+    height: 234px;
     width: 193px;
-    background: url("./../assets/images/badge_gold.webp");
+    background: url("./../assets/images/50_ucl_rttk.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -224,14 +220,26 @@ a {
     justify-content: flex-end;
     align-items: center;
     position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.bigcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 .images:hover {
+    /* box-shadow: 0 10px 12px rgba(203, 228, 17, 0.509); */
+    
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(0 10px 12px rgba(203, 228, 17, 0.509));
 }
 
 .images p {
@@ -242,62 +250,104 @@ a {
 
 .images img {
     max-width: 80%;
-    /* border-radius: 10px;
-    margin-top: 10px; */
+
 }
 
-.drawar {
-    display: none;
-    position: fixed;
-    right: 10%;
-    top: 10%;
-    width: 60%;
-    height: 80%;
-    background-color: beige;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    overflow-y: auto;
-    padding: 20px;
-    z-index: 1000;
-    transition: transform 0.3s ease-in-out;
-}
-
-.drawar.active {
-    display: block;
-    transform: translateX(0);
-}
-
+.drawar,
 .drawarGK {
     display: none;
     position: fixed;
-    right: 10%;
-    top: 10%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 60%;
     height: 80%;
-    background-color: beige;
+    background-color: #ecf0f1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     overflow-y: auto;
     padding: 20px;
     z-index: 1000;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease;
 }
 
+.drawar.active,
 .drawarGK.active {
     display: block;
-    transform: translateX(0);
+    opacity: 1;
+    transform: translate(-50%, -50%);
 }
 
 button {
+    /* background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 1px 18px;
+     border-radius: 10px;
+    transition: background-color 0.3s ease;
+    margin: 2px;
+     font-size: 0.9rem; */
     background-color: #007bff;
         color: white;
         border: none;
         cursor: pointer;
-        padding: 10px 3px;
-        font-size: 1.5rem;
-        border-radius: 5px;
+        padding: 3px 18px;
+        /* font-size: 0rem; */
+        border-radius: 10px;
         transition: background-color 0.3s ease;
+        margin: 1px;
+        width: 26%;
+        font-size: 0.9rem;
+        position: relative;
+        top: 5%
 }
+
+.fa-solid {
+    color: white;
+    background-color: #3d4d87d6;
+     border-radius: 50%;
+     padding: 5px;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+     transition: transform 0.2s, box-shadow 0.2s;
+     font-size: 24px;
+     display: inline-block;
+     text-align: center;
+     /* position: relative;
+     top: 4%; */
+ }
+
+ .fa-solid:hover {
+    transform: scale(1.2);
+ }
+
+#submitButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 1px 18px;
+    /* font-size: 0rem; */
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    margin: 2px;
+    width: 100%;
+    font-size: 0.9rem;
+}
+#submitButtonGK {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 1px 18px;
+    /* font-size: 0rem; */
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    margin: 2px;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
 
 button:hover {
     background-color: #0056b3;
@@ -338,16 +388,14 @@ h6 {
 }
 
 #myStockLw {
-    /* width: 102%; */
-    height: 43%;
-
+height: 51%;
+    width: 82%;
 
 }
 
 #imagerating {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* padding: 24%; */
 }
 
 #nameofPlayer p {
@@ -396,4 +444,15 @@ h6 {
 
 h6 {
     font-size: 6px;
+}
+
+/* .deleteButton{
+position: relative;
+left: 20%;
+} */
+.bigcontainer {}
+
+.addButton i {
+    margin-right: 5px;
+    /* Adds space between icon and text */
 }
