@@ -40,6 +40,13 @@ function updateCardData(card, playerData, stats) {
     nameElement.innerText = playerData.name;
     nameContainer.appendChild(nameElement);
 
+    // positionn
+    // const positionn = card.querySelector("#remplacenPosition");
+    // positionn.innerText = "";
+    // const positionElement = document.createElement("p");
+    // positionElement.innerText = ` ${playerData.positionPlayer}`;
+    // positionn.appendChild(positionElement);
+    // console.log(positionn)
 
 
 
@@ -47,7 +54,7 @@ function updateCardData(card, playerData, stats) {
     const ratings = card.querySelector("#ratingss");
     ratings.innerText = "";
     const ratingElement = document.createElement("p");
-    ratingElement.innerText = `Rating: ${playerData.rating}`;
+    ratingElement.innerText = ` ${playerData.rating}`;
     ratings.appendChild(ratingElement);
 
     // Stats
@@ -194,7 +201,7 @@ submitButton.addEventListener("click", (event) => {
                 name: card.querySelector("#nameofPlayer").innerText,
                 photo: card.querySelector("#myplayerImage img")?.src || '',
                 flag: card.querySelector("#flagss img")?.src || '',
-                // positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
+                positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
                 club: card.querySelector("#club")?.innerText || '',
                 logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
                 rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
@@ -330,7 +337,7 @@ submitButtonGK.addEventListener("click", (event) => {
                 name: card.querySelector("#nameofPlayer").innerText,
                 photo: card.querySelector("#myplayerImage img")?.src || '',
                 flag: card.querySelector("#flagss img")?.src || '',
-                // positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
+                positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
                 club: card.querySelector("#club")?.innerText || '',
                 logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
                 rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
