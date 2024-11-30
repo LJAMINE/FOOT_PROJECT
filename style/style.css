@@ -196,7 +196,8 @@ a {
 }
 
 .drawar,
-.drawarGK {
+.drawarGK,
+.drawarR {
     position: fixed;
     display: none;
     top: 47%;
@@ -215,7 +216,8 @@ a {
 
 
 .drawar.active,
-.drawarGK.active {
+.drawarGK.active
+.drawarR.drawar.active {
     display: block;
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -270,6 +272,17 @@ button {
 }
 
 #submitButtonGK {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 1px 18px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    margin: 2px;
+    width: 100%;
+    font-size: 0.9rem;
+}#submitButtonR {
     background-color: #007bff;
     color: white;
     border: none;

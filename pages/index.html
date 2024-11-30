@@ -38,14 +38,17 @@
 
                 <label for="flag">Flag URL</label>
                 <input type="url" id="flag" name="flag" placeholder="https://example.com/flag.png" required>
-                <label for="position">position</label>
+                <label for="position" id="positionLabel">position</label>
 
                 <select name="" id="positionPlayer">
                     <option value="GK">GK</option>
-                    <option value="CB">CB</option>
+                    <option value="CBR">CBR</option>
+                    <option value="CBL">CBL</option>
                     <option value="LB">LB</option>
                     <option value="RB">RB</option>
                     <option value="CM">CM</option>
+                    <option value="RM">RM</option>
+                    <option value="LM">LM</option>
                     <option value="RW">RW</option>
                     <option value="LW">LW</option>
                     <option value="ST">ST</option>
@@ -116,7 +119,7 @@
 
                 <label for="flag">Flag URL</label>
                 <input type="url" id="flagGK" name="flag" placeholder="https://example.com/flag.png" required>
-                <!-- <label for="position">position</label>
+                <label for="position">position</label>
 
                 <select name="" id="positionPlayerGK">
                     <option value="GK">GK</option>
@@ -127,7 +130,7 @@
                     <option value="RW">RW</option>
                     <option value="LW">LW</option>
                     <option value="ST">ST</option>
-                </select> -->
+                </select>
 
                 <label for="clubGK">Club</label>
                 <input type="text" id="clubGK" name="club" placeholder="Liverpool, Real Madrid " required>
@@ -194,7 +197,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">LW</div>
+                        <div id="remplacenPosition">LW</div>
                         <i class="fa-solid fa-plus addButton" player-post="LW"></i>
 
                         <!-- <button class="addButton" player-post="LW"><i class="fa-solid fa-plus"></i> <div></div></button> -->
@@ -221,7 +224,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">ST</div>
+                        <div id="remplacenPosition">ST</div>
                         <i class="fa-solid fa-plus addButton" player-post="ST"></i>
 
 
@@ -246,7 +249,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">RW</div>
+                        <div id="remplacenPosition">RW</div>
                         <i class="fa-solid fa-plus addButton" player-post="RW"></i>
 
                         <!-- <div id="">RW</div> <button class="addButton" player-post="RW">add</button> -->
@@ -273,7 +276,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">LM</div>
+                        <div id="remplacenPosition">LM</div>
                         <i class="fa-solid fa-plus addButton" player-post="LM"></i>
 
                         <!-- <div id="">LM</div> <button class="addButton" player-post="LM">add</button> -->
@@ -296,7 +299,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">CM</div>
+                        <div id="remplacenPosition">CM</div>
                         <i class="fa-solid fa-plus addButton" player-post="CM"></i>
 
                         <!-- <div id="">CM</div> <button class="addButton" player-post="CM">add</button> -->
@@ -319,7 +322,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">RM</div>
+                        <div id="remplacenPosition">RM</div>
                         <i class="fa-solid fa-plus addButton" player-post="RM"></i>
 
                         <!-- <div id="">RM</div> <button class="addButton" player-post="RM">add</button> -->
@@ -346,7 +349,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">LB</div>
+                        <div id="remplacenPosition">LB</div>
                         <i class="fa-solid fa-plus addButton" player-post="LB"></i>
 
                         <!-- <div id="">LB</div> <button class="addButton" player-post="LB">add</button> -->
@@ -369,7 +372,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">CBL</div>
+                        <div id="remplacenPosition">CBL</div>
                         <i class="fa-solid fa-plus addButton" player-post="CBL"></i>
 
                         <!-- <div id="">CBL</div> <button class="addButton" player-post="CBL">add</button> -->
@@ -392,7 +395,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">CBR</div>
+                        <div id="remplacenPosition">CBR</div>
                         <i class="fa-solid fa-plus addButton" player-post="CBR"></i>
 
                         <!-- <div id="">CBR</div> <button class="addButton" player-post="CBR">add</button> -->
@@ -415,7 +418,7 @@
                                 <div id="statsleft"></div>
                             </div>
                         </div>
-                        <div id="">RB</div>
+                        <div id="remplacenPosition">RB</div>
                         <i class="fa-solid fa-plus addButton" player-post="RB"></i>
 
                         <!-- <div id="">RB</div> <button class="addButton" player-post="RB">add</button> -->
@@ -445,7 +448,7 @@
                         <!-- <div id="newDiv">
                             GK <button class="clickGK" player-post="GK">add</button>
                         </div> -->
-                        <div id="">GK</div>
+                        <div id="remplacenPosition">GK</div>
                         <i class="fa-solid fa-plus clickGK" player-post="GK"></i>
 
                         <!-- <div>GK</div> <button class="clickGK" player-post="GK">add</button> -->
@@ -502,7 +505,7 @@
                         <div id="statsleft"></div>
                     </div>
                 </div>
-                <div id="">CM</div> <button class="addButton" player-post="remplacent2">add</button>
+                <div id="remplacenPosition"></div> <button class="addButton" player-post="remplacent2">add</button>
             </div>
             <div id="remplacent3" class="images">
                 <div id="myStockLw">
@@ -522,7 +525,7 @@
                         <div id="statsleft"></div>
                     </div>
                 </div>
-                <div id="">RB</div> <button class="addButton" player-post="remplacent3">add</button>
+                <div id="remplacenPosition"></div> <button class="addButton" player-post="remplacent3">add</button>
             </div>
             <div id="remplacent4" class="images">
                 <div id="myStockLw">

@@ -19,7 +19,7 @@ function clearCardData(card) {
     card.querySelector("#ratingss").innerText = "";
     card.querySelector("#flagss").innerText = "";
     card.querySelector("#nameofPlayer").innerText = "";
-    // card.querySelector("#remplacenPosition").innerText = "";
+    card.querySelector("#remplacenPosition").innerText = "";
 }
 // ------------------------empty----------------------
 
@@ -41,12 +41,12 @@ function updateCardData(card, playerData, stats) {
     nameContainer.appendChild(nameElement);
 
     // positionn
-    // const positionn = card.querySelector("#remplacenPosition");
-    // positionn.innerText = "";
-    // const positionElement = document.createElement("p");
-    // positionElement.innerText = ` ${playerData.positionPlayer}`;
-    // positionn.appendChild(positionElement);
-    // console.log(positionn)
+    const positionn = card.querySelector("#remplacenPosition");
+    positionn.innerText = "";
+    const positionElement = document.createElement("p");
+    positionElement.innerText = ` ${playerData.positionPlayer}`;
+    positionn.appendChild(positionElement);
+    console.log(positionn)
 
 
 
@@ -89,11 +89,30 @@ function updateCardData(card, playerData, stats) {
 // ------------------------ end function info first ----------------------
 // ------------------------function players----------------------
 
+const positionLabel = document.getElementById('positionLabel');
+const positionSelect = document.getElementById('positionPlayer');
 
 addButton.forEach(button => {
     button.addEventListener("click", (event) => {
         currentPosition = event.target.getAttribute("player-post");
         console.log(currentPosition)
+
+        // if (currentPosition === "remplacent1" || currentPosition === "remplacent2" || currentPosition === "remplacent3" || currentPosition === "remplacent4") {
+        //     positionLabel.style.display = 'inline';
+        //     positionSelect.style.display = 'inline';
+
+
+
+
+
+        // } else {
+        //     positionLabel.style.display = 'none';
+        //     positionSelect.style.display = 'none';
+
+
+
+
+        // }
         drawar.style.display = "block";
     });
 });
@@ -107,123 +126,260 @@ submitButton.addEventListener("click", (event) => {
     event.preventDefault();
     const playerData = getPlayerData();
 
-    if (isPlayerinfoValid(playerData)) {
-        const selectedPositionCard = document.getElementById(currentPosition);
-
-        const stats = {
-            left: [
-                { label: "DRI", value: playerData.dribbling },
-                { label: "DEF", value: playerData.defending },
-                { label: "PHY", value: playerData.physical }
-            ],
-            right: [
-                { label: "PAC", value: playerData.pace },
-                { label: "SHO", value: playerData.shooting },
-                { label: "PAS", value: playerData.passing }
-            ]
-        };
-
-        clearCardData(selectedPositionCard);
-        updateCardData(selectedPositionCard, playerData, stats);
-        // supprimer add button
-        const addButton = selectedPositionCard.querySelector(".addButton");
-        addButton.style.display = "none";
-
-        // add delete et update button
-        const deleteButton = document.createElement("button");
-        deleteButton.innerText = "";
-        // deleteButton.classList.add("deleteButton");
-        deleteButton.setAttribute("class", "fa-solid fa-trash addButton")
+    if (currentPosition === "remplacent1" || currentPosition === "remplacent2" || currentPosition === "remplacent3" || currentPosition === "remplacent4") {
+      
 
 
-
-        selectedPositionCard.appendChild(deleteButton);
-
-
-        const updateButton = document.createElement("button");
-        updateButton.innerText = "";
-        // updateButton.classList.add("updatemostapha")
-        updateButton.setAttribute("class", "fa-solid fa-pen-to-square addButton")
-        selectedPositionCard.appendChild(updateButton)
-
-
-        // ----------updateButton dtn-----------------------------------------
-
-        updateButton.addEventListener("click", function () {
+        if (isPlayerinfoValid(playerData)) {
             const selectedPositionCard = document.getElementById(currentPosition);
-            const playerData = getPlayerDataFromCard(selectedPositionCard);
 
-
-            document.getElementById("name").value = playerData.name
-            document.getElementById("photo").value = playerData.photo
-            document.getElementById("flag").value = playerData.flag
-            // document.getElementById("positionPlayer").value = playerData.positionPlayer
-            document.getElementById("club").value = playerData.club
-            document.getElementById("logo").value = playerData.logo
-            document.getElementById("rating").value = playerData.rating
-            document.getElementById("pace").value = playerData.pace
-            document.getElementById("shooting").value = playerData.shooting
-            document.getElementById("passing").value = playerData.passing
-            document.getElementById("dribbling").value = playerData.dribbling
-            document.getElementById("defending").value = playerData.defending
-            document.getElementById("physical").value = playerData.physical
-
-            drawar.style.display = "block";
-            updateButton.style.display = "none";
-            deleteButton.style.display = "none";
-
-
-
-        })
-
-        // ----------delete dtn-------------------
-        deleteButton.addEventListener("click", function () {
-            const selectedPositionCard = document.getElementById(currentPosition);
-            console.log(selectedPositionCard)
-
-            clearCardData(selectedPositionCard);
-
-            const addButton = selectedPositionCard.querySelector(".addButton");
-            addButton.style.display = "block";
-
-            deleteButton.style.display = "none";
-            updateButton.style.display = "none";
-
-            // id reset form
-            // playerForm.reset();
-
-            // drawar.style.display = "none";
-
-        })
-
-        function getPlayerDataFromCard(card) {
-            const playerData = {
-                name: card.querySelector("#nameofPlayer").innerText,
-                photo: card.querySelector("#myplayerImage img")?.src || '',
-                flag: card.querySelector("#flagss img")?.src || '',
-                positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
-                club: card.querySelector("#club")?.innerText || '',
-                logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
-                rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
-                pace: card.querySelector("#statsleft h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
-                shooting: card.querySelector("#statsright h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
-                passing: card.querySelector("#statsright h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
-                dribbling: card.querySelector("#statsleft h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
-                defending: card.querySelector("#statsleft h6:nth-child(3)")?.innerText.split(":")[1]?.trim() || '',
-                physical: card.querySelector("#statsleft h6:nth-child(4)")?.innerText.split(":")[1]?.trim() || ''
+            const stats = {
+                left: [
+                    { label: "DRI", value: playerData.dribbling },
+                    { label: "DEF", value: playerData.defending },
+                    { label: "PHY", value: playerData.physical }
+                ],
+                right: [
+                    { label: "PAC", value: playerData.pace },
+                    { label: "SHO", value: playerData.shooting },
+                    { label: "PAS", value: playerData.passing }
+                ]
             };
 
-            return playerData;
+            clearCardData(selectedPositionCard);
+            updateCardData(selectedPositionCard, playerData, stats);
+            // supprimer add button
+            const addButton = selectedPositionCard.querySelector(".addButton");
+            addButton.style.display = "none";
+
+            // add delete et update button
+            const deleteButton = document.createElement("button");
+            deleteButton.innerText = "";
+            // deleteButton.classList.add("deleteButton");
+            deleteButton.setAttribute("class", "fa-solid fa-trash addButton")
+
+
+
+            selectedPositionCard.appendChild(deleteButton);
+
+
+            const updateButton = document.createElement("button");
+            updateButton.innerText = "";
+            // updateButton.classList.add("updatemostapha")
+            updateButton.setAttribute("class", "fa-solid fa-pen-to-square addButton")
+            selectedPositionCard.appendChild(updateButton)
+
+
+            // ----------updateButton dtn-----------------------------------------
+
+            updateButton.addEventListener("click", function () {
+                const selectedPositionCard = document.getElementById(currentPosition);
+                const playerData = getPlayerDataFromCard(selectedPositionCard);
+
+
+                document.getElementById("name").value = playerData.name
+                document.getElementById("photo").value = playerData.photo
+                document.getElementById("flag").value = playerData.flag
+                document.getElementById("positionPlayer").value = playerData.positionPlayer
+                document.getElementById("club").value = playerData.club
+                document.getElementById("logo").value = playerData.logo
+                document.getElementById("rating").value = playerData.rating
+                document.getElementById("pace").value = playerData.pace
+                document.getElementById("shooting").value = playerData.shooting
+                document.getElementById("passing").value = playerData.passing
+                document.getElementById("dribbling").value = playerData.dribbling
+                document.getElementById("defending").value = playerData.defending
+                document.getElementById("physical").value = playerData.physical
+
+                drawar.style.display = "block";
+                updateButton.style.display = "none";
+                deleteButton.style.display = "none";
+
+
+
+            })
+
+            // ----------delete dtn-------------------
+            deleteButton.addEventListener("click", function () {
+                const selectedPositionCard = document.getElementById(currentPosition);
+                console.log(selectedPositionCard)
+
+                clearCardData(selectedPositionCard);
+
+                const addButton = selectedPositionCard.querySelector(".addButton");
+                addButton.style.display = "block";
+
+                deleteButton.style.display = "none";
+                updateButton.style.display = "none";
+
+                // id reset form
+                // playerForm.reset();
+
+                // drawar.style.display = "none";
+
+            })
+
+            function getPlayerDataFromCard(card) {
+                const playerData = {
+                    name: card.querySelector("#nameofPlayer").innerText,
+                    photo: card.querySelector("#myplayerImage img")?.src || '',
+                    flag: card.querySelector("#flagss img")?.src || '',
+                    positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
+                    club: card.querySelector("#club")?.innerText || '',
+                    logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
+                    rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
+                    pace: card.querySelector("#statsleft h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                    shooting: card.querySelector("#statsright h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                    passing: card.querySelector("#statsright h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                    dribbling: card.querySelector("#statsleft h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                    defending: card.querySelector("#statsleft h6:nth-child(3)")?.innerText.split(":")[1]?.trim() || '',
+                    physical: card.querySelector("#statsleft h6:nth-child(4)")?.innerText.split(":")[1]?.trim() || ''
+                };
+
+                return playerData;
+            }
+
+
+            drawar.style.display = "none";
+            playerForm.reset();
+
+
+        } else {
+            alert("Please entrer tout correctly.");
         }
 
 
-        drawar.style.display = "none";
-        playerForm.reset();
-
-
     } else {
-        alert("Please entrer tout correctly.");
+      
+
+        if (currentPosition !== playerData.positionPlayer) {
+            alert("not same")
+
+        } else {
+            if (isPlayerinfoValid(playerData)) {
+                const selectedPositionCard = document.getElementById(currentPosition);
+
+                const stats = {
+                    left: [
+                        { label: "DRI", value: playerData.dribbling },
+                        { label: "DEF", value: playerData.defending },
+                        { label: "PHY", value: playerData.physical }
+                    ],
+                    right: [
+                        { label: "PAC", value: playerData.pace },
+                        { label: "SHO", value: playerData.shooting },
+                        { label: "PAS", value: playerData.passing }
+                    ]
+                };
+
+                clearCardData(selectedPositionCard);
+                updateCardData(selectedPositionCard, playerData, stats);
+                // supprimer add button
+                const addButton = selectedPositionCard.querySelector(".addButton");
+                addButton.style.display = "none";
+
+                // add delete et update button
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "";
+                // deleteButton.classList.add("deleteButton");
+                deleteButton.setAttribute("class", "fa-solid fa-trash addButton")
+
+
+
+                selectedPositionCard.appendChild(deleteButton);
+
+
+                const updateButton = document.createElement("button");
+                updateButton.innerText = "";
+                // updateButton.classList.add("updatemostapha")
+                updateButton.setAttribute("class", "fa-solid fa-pen-to-square addButton")
+                selectedPositionCard.appendChild(updateButton)
+
+
+                // ----------updateButton dtn-----------------------------------------
+
+                updateButton.addEventListener("click", function () {
+                    const selectedPositionCard = document.getElementById(currentPosition);
+                    const playerData = getPlayerDataFromCard(selectedPositionCard);
+
+
+                    document.getElementById("name").value = playerData.name
+                    document.getElementById("photo").value = playerData.photo
+                    document.getElementById("flag").value = playerData.flag
+                    document.getElementById("positionPlayer").value = playerData.positionPlayer
+                    document.getElementById("club").value = playerData.club
+                    document.getElementById("logo").value = playerData.logo
+                    document.getElementById("rating").value = playerData.rating
+                    document.getElementById("pace").value = playerData.pace
+                    document.getElementById("shooting").value = playerData.shooting
+                    document.getElementById("passing").value = playerData.passing
+                    document.getElementById("dribbling").value = playerData.dribbling
+                    document.getElementById("defending").value = playerData.defending
+                    document.getElementById("physical").value = playerData.physical
+
+                    drawar.style.display = "block";
+                    updateButton.style.display = "none";
+                    deleteButton.style.display = "none";
+
+
+
+                })
+
+                // ----------delete dtn-------------------
+                deleteButton.addEventListener("click", function () {
+                    const selectedPositionCard = document.getElementById(currentPosition);
+                    console.log(selectedPositionCard)
+
+                    clearCardData(selectedPositionCard);
+
+                    const addButton = selectedPositionCard.querySelector(".addButton");
+                    addButton.style.display = "block";
+
+                    deleteButton.style.display = "none";
+                    updateButton.style.display = "none";
+
+                    // id reset form
+                    // playerForm.reset();
+
+                    // drawar.style.display = "none";
+
+                })
+
+                function getPlayerDataFromCard(card) {
+                    const playerData = {
+                        name: card.querySelector("#nameofPlayer").innerText,
+                        photo: card.querySelector("#myplayerImage img")?.src || '',
+                        flag: card.querySelector("#flagss img")?.src || '',
+                        positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
+                        club: card.querySelector("#club")?.innerText || '',
+                        logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
+                        rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
+                        pace: card.querySelector("#statsleft h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                        shooting: card.querySelector("#statsright h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                        passing: card.querySelector("#statsright h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                        dribbling: card.querySelector("#statsleft h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                        defending: card.querySelector("#statsleft h6:nth-child(3)")?.innerText.split(":")[1]?.trim() || '',
+                        physical: card.querySelector("#statsleft h6:nth-child(4)")?.innerText.split(":")[1]?.trim() || ''
+                    };
+
+                    return playerData;
+                }
+
+
+                drawar.style.display = "none";
+                playerForm.reset();
+
+
+            } else {
+                alert("Please entrer tout correctly.");
+            }
+        }
+
+
     }
+
+ 
+   
 });
 
 // ------------------------ end function players----------------------
@@ -387,7 +543,7 @@ function getPlayerData() {
         name: document.getElementById("name").value,
         photo: document.getElementById("photo").value,
         flag: document.getElementById("flag").value,
-        // positionPlayer: document.getElementById("positionPlayer").value,
+        positionPlayer: document.getElementById("positionPlayer").value,
 
         club: document.getElementById("club").value,
         logo: document.getElementById("logo").value,
