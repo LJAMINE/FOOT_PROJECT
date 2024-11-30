@@ -96,23 +96,6 @@ addButton.forEach(button => {
     button.addEventListener("click", (event) => {
         currentPosition = event.target.getAttribute("player-post");
         console.log(currentPosition)
-
-        // if (currentPosition === "remplacent1" || currentPosition === "remplacent2" || currentPosition === "remplacent3" || currentPosition === "remplacent4") {
-        //     positionLabel.style.display = 'inline';
-        //     positionSelect.style.display = 'inline';
-
-
-
-
-
-        // } else {
-        //     positionLabel.style.display = 'none';
-        //     positionSelect.style.display = 'none';
-
-
-
-
-        // }
         drawar.style.display = "block";
     });
 });

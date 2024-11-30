@@ -187,7 +187,6 @@ a {
 .images p {
 
     text-align: center;
-    padding: 3px;
 
 }
 
@@ -197,8 +196,7 @@ a {
 }
 
 .drawar,
-.drawarGK,
-.drawarR {
+.drawarGK {
     position: fixed;
     display: none;
     top: 47%;
@@ -217,7 +215,7 @@ a {
 
 
 .drawar.active,
-.drawarGK.active .drawarR.drawar.active {
+.drawarGK.active {
     display: block;
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -247,7 +245,7 @@ button {
     padding: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
-    font-size: 24px;
+    font-size: 19px;
     display: inline-block;
     text-align: center;
     /* position: relative;
@@ -272,19 +270,6 @@ button {
 }
 
 #submitButtonGK {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 1px 18px;
-    border-radius: 10px;
-    transition: 0.3s ease;
-    margin: 2px;
-    width: 100%;
-    font-size: 0.9rem;
-}
-
-#submitButtonR {
     background-color: #007bff;
     color: white;
     border: none;
@@ -337,7 +322,7 @@ h6 {
 }
 
 #myStockLw {
-    height: 30%;
+    height: 40%;
     width: 83%;
 
 }
@@ -348,7 +333,7 @@ h6 {
 }
 
 #nameofPlayer p {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 
@@ -400,4 +385,191 @@ h6 {
 
 .addButton i {
     /* margin-right: 5px; */
+}
+
+@media (max-width: 768px) {
+    .images {
+        padding: 10px;
+        font-size: 0.6rem;
+        color: white;
+        height: 116px;
+        width: 90px;
+        background: url("./../assets/images/50_ucl_rttk.webp");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    }
+
+    #playerForm {
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 4px;
+        row-gap: 4px;
+    }
+
+    #myStockLw {
+        height: 35%;
+        width: 83%;
+
+    }
+
+    #nameofPlayer p {
+        /* font-size: 10px; */
+    }
+
+    h6 {
+        font-size: 3px;
+    }
+
+    .fa-solid {
+        color: white;
+        background-color: #3d4d87d6;
+        border-radius: 50%;
+        padding: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-size: 5px;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+@media (max-width: 320px) {
+
+
+
+    .images {
+        padding: 7px;
+        font-size: 0.3rem;
+        color: white;
+        height: 90px;
+        width: 80px;
+        background: url("./../assets/images/50_ucl_rttk.webp");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    }
+
+    #playerForm {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 4px;
+        row-gap: 4px;
+    }
+
+    #myStockLw {
+        height: 41%;
+        width: 80%;
+    }
+
+
+    #nameofPlayer p {
+        font-size: 0.4rem;
+    }
+
+    .defence {
+        display: flex;
+        justify-content: space-between;
+        padding: 1px;
+    }
+
+
+    .bigcontainer {
+        max-width: 100%;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .drawar,
+    .drawarGK {
+        position: fixed;
+        display: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        max-height: 90%;
+        height: auto;
+        background-color: #3562A6;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow-y: auto;
+        padding: 15px;
+        z-index: 1000;
+    }
+
+    /* .drawar.active,
+        .drawarGK.active {
+            display: block;
+        } */
+
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #submitButton,
+    #closeButton {
+        width: 80%;
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+
+    #closeButton {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .drawar-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .drawar-content input {
+        width: 80%;
+        padding: 10px;
+        margin: 5px 0;
+        font-size: 0.8rem;
+        border-radius: 4px;
+    }
+
+    .remplccent {
+        margin-top: 3%;
+        border: 4px solid black;
+        display: flex;
+        justify-content: space-between;
+        padding: 2%;
+        flex-wrap: wrap;
+    }
+
+    #flagss {
+        display: flex;
+        justify-content: space-around;
+        gap: 1px;
+        height: 12px;
+        width: 13px
+    }
+
 }
