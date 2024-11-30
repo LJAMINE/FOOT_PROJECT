@@ -126,12 +126,17 @@ submitButton.addEventListener("click", (event) => {
     event.preventDefault();
     const playerData = getPlayerData();
 
+
+
     if (currentPosition === "remplacent1" || currentPosition === "remplacent2" || currentPosition === "remplacent3" || currentPosition === "remplacent4") {
-      
+
+
 
 
         if (isPlayerinfoValid(playerData)) {
             const selectedPositionCard = document.getElementById(currentPosition);
+
+
 
             const stats = {
                 left: [
@@ -250,10 +255,10 @@ submitButton.addEventListener("click", (event) => {
 
 
     } else {
-      
+
 
         if (currentPosition !== playerData.positionPlayer) {
-            alert("not same")
+            alert("pas la meme position")
 
         } else {
             if (isPlayerinfoValid(playerData)) {
@@ -378,8 +383,8 @@ submitButton.addEventListener("click", (event) => {
 
     }
 
- 
-   
+
+
 });
 
 // ------------------------ end function players----------------------
@@ -400,141 +405,133 @@ closemeGK.addEventListener("click", () => {
 submitButtonGK.addEventListener("click", (event) => {
     event.preventDefault();
     const goalkeeperData = getGoalkeeperData();
+    if (currentPosition !== goalkeeperData.positionPlayer) {
 
-    if (isGoalkeepeinfoValid(goalkeeperData)) {
-        const selectedPositionCard = document.getElementById(currentPosition);
-
-        const stats = {
-            left: [
-                { label: "DIV", value: goalkeeperData.diving },
-                { label: "HAN", value: goalkeeperData.handling },
-                { label: "KIC", value: goalkeeperData.kicking }
-            ],
-            right: [
-                { label: "REF", value: goalkeeperData.reflexes },
-                { label: "SPE", value: goalkeeperData.speed },
-                { label: "POS", value: goalkeeperData.positioning }
-            ]
-        };
-
-        clearCardData(selectedPositionCard);
-        updateCardData(selectedPositionCard, goalkeeperData, stats);
-
-        // none click addGk
-
-        const clickGK = selectedPositionCard.querySelector(".clickGK");
-        clickGK.style.display = "none";
-
-        //add delete et update button
-        const deleteButton = document.createElement("button");
-        deleteButton.innerText = "";
-        // deleteButton.classList.add("deleteButton");
-        deleteButton.setAttribute("class", "fa-solid fa-trash clickGK")
-
-        selectedPositionCard.appendChild(deleteButton);
-
-
-        const updateButton = document.createElement("button");
-        updateButton.innerText = "";
-        // updateButton.classList.add("updateButton")
-        updateButton.setAttribute("class", "fa-solid fa-pen-to-square clickGK")
-
-        selectedPositionCard.appendChild(updateButton)
-
-        drawarGK.style.display = "none";
-        updateButton.addEventListener("click", function () {
-            const selectedPositionCard = document.getElementById(currentPosition);
-            const playerData = getPlayerDataFromCard(selectedPositionCard);
-
-
-            document.getElementById("name").value = playerData.name
-            document.getElementById("photo").value = playerData.photo
-            document.getElementById("flag").value = playerData.flag
-            // document.getElementById("positionPlayer").value = playerData.positionPlayer
-            document.getElementById("club").value = playerData.club
-            document.getElementById("logo").value = playerData.logo
-            document.getElementById("rating").value = playerData.rating
-            document.getElementById("reflexes").value = playerData.reflexes
-            document.getElementById("speed").value = playerData.speed
-            document.getElementById("positioning").value = playerData.positioning
-            document.getElementById("diving").value = playerData.diving
-            document.getElementById("handling").value = playerData.handling
-            document.getElementById("kicking").value = playerData.kicking
-
-            drawarGK.style.display = "block";
-            updateButton.style.display = "none";
-            deleteButton.style.display = "none";
-
-
-
-        })
-
-        // ----------delete dtn-------------------
-        deleteButton.addEventListener("click", function () {
-            const selectedPositionCard = document.getElementById(currentPosition);
-            console.log(selectedPositionCard)
-
-            clearCardData(selectedPositionCard);
-
-            const clickGK = selectedPositionCard.querySelector(".clickGK");
-            clickGK.style.display = "block";
-
-            deleteButton.style.display = "none";
-            updateButton.style.display = "none";
-
-            // id reset form
-            // playerForm.reset();
-
-            drawarGK.style.display = "none";
-
-        })
-        function getPlayerDataFromCard(card) {
-            const playerData = {
-                name: card.querySelector("#nameofPlayer").innerText,
-                photo: card.querySelector("#myplayerImage img")?.src || '',
-                flag: card.querySelector("#flagss img")?.src || '',
-                positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
-                club: card.querySelector("#club")?.innerText || '',
-                logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
-                rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
-                reflexes: card.querySelector("#statsleft h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
-                speed: card.querySelector("#statsright h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
-                positioning: card.querySelector("#statsright h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
-                diving: card.querySelector("#statsleft h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
-                handling: card.querySelector("#statsleft h6:nth-child(3)")?.innerText.split(":")[1]?.trim() || '',
-                kicking: card.querySelector("#statsleft h6:nth-child(4)")?.innerText.split(":")[1]?.trim() || ''
-            };
-
-            return playerData;
-        }
-
-
-        drawar.style.display = "none";
-        playerForm.reset();
+        alert("pas la meme position")
 
 
     } else {
-        alert("Please entrer tout correct.");
+        if (isGoalkeepeinfoValid(goalkeeperData)) {
+            const selectedPositionCard = document.getElementById(currentPosition);
+
+            const stats = {
+                left: [
+                    { label: "DIV", value: goalkeeperData.diving },
+                    { label: "HAN", value: goalkeeperData.handling },
+                    { label: "KIC", value: goalkeeperData.kicking }
+                ],
+                right: [
+                    { label: "REF", value: goalkeeperData.reflexes },
+                    { label: "SPE", value: goalkeeperData.speed },
+                    { label: "POS", value: goalkeeperData.positioning }
+                ]
+            };
+
+            clearCardData(selectedPositionCard);
+            updateCardData(selectedPositionCard, goalkeeperData, stats);
+
+            // none click addGk
+
+            const clickGK = selectedPositionCard.querySelector(".clickGK");
+            clickGK.style.display = "none";
+
+            //add delete et update button
+            const deleteButton = document.createElement("button");
+            deleteButton.innerText = "";
+            // deleteButton.classList.add("deleteButton");
+            deleteButton.setAttribute("class", "fa-solid fa-trash clickGK")
+
+            selectedPositionCard.appendChild(deleteButton);
+
+
+            const updateButton = document.createElement("button");
+            updateButton.innerText = "";
+            // updateButton.classList.add("updateButton")
+            updateButton.setAttribute("class", "fa-solid fa-pen-to-square clickGK")
+
+            selectedPositionCard.appendChild(updateButton)
+
+            drawarGK.style.display = "none";
+            updateButton.addEventListener("click", function () {
+                const selectedPositionCard = document.getElementById(currentPosition);
+                const playerData = getPlayerDataFromCard(selectedPositionCard);
+
+
+                document.getElementById("name").value = playerData.name
+                document.getElementById("photo").value = playerData.photo
+                document.getElementById("flag").value = playerData.flag
+                document.getElementById("positionPlayer").value = playerData.positionPlayer
+                document.getElementById("club").value = playerData.club
+                document.getElementById("logo").value = playerData.logo
+                document.getElementById("rating").value = playerData.rating
+                document.getElementById("reflexes").value = playerData.reflexes
+                document.getElementById("speed").value = playerData.speed
+                document.getElementById("positioning").value = playerData.positioning
+                document.getElementById("diving").value = playerData.diving
+                document.getElementById("handling").value = playerData.handling
+                document.getElementById("kicking").value = playerData.kicking
+
+                drawarGK.style.display = "block";
+                updateButton.style.display = "none";
+                deleteButton.style.display = "none";
+
+
+
+            })
+
+            // ----------delete dtn-------------------
+            deleteButton.addEventListener("click", function () {
+                const selectedPositionCard = document.getElementById(currentPosition);
+                console.log(selectedPositionCard)
+
+                clearCardData(selectedPositionCard);
+
+                const clickGK = selectedPositionCard.querySelector(".clickGK");
+                clickGK.style.display = "block";
+
+                deleteButton.style.display = "none";
+                updateButton.style.display = "none";
+
+                // id reset form
+                // playerForm.reset();
+
+                drawarGK.style.display = "none";
+
+            })
+            function getPlayerDataFromCard(card) {
+                const playerData = {
+                    name: card.querySelector("#nameofPlayer").innerText,
+                    photo: card.querySelector("#myplayerImage img")?.src || '',
+                    flag: card.querySelector("#flagss img")?.src || '',
+                    positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
+                    club: card.querySelector("#club")?.innerText || '',
+                    logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
+                    rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
+                    reflexes: card.querySelector("#statsleft h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                    speed: card.querySelector("#statsright h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                    positioning: card.querySelector("#statsright h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                    diving: card.querySelector("#statsleft h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                    handling: card.querySelector("#statsleft h6:nth-child(3)")?.innerText.split(":")[1]?.trim() || '',
+                    kicking: card.querySelector("#statsleft h6:nth-child(4)")?.innerText.split(":")[1]?.trim() || ''
+                };
+
+                return playerData;
+            }
+
+
+            drawar.style.display = "none";
+            playerForm.reset();
+
+
+        } else {
+            alert("Please entrer tout correct.");
+        }
     }
+
+
 });
 
 // ------------------------------------ end GK----------------------------------
-
-
-// ------------------------------------remplacent------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-// ------------------------------------remplacent------------------------------------------------
-
 
 // --------------helper fonction-----------------------------------------------------------
 
@@ -564,7 +561,7 @@ function getGoalkeeperData() {
         photo: document.getElementById("photoGK").value,
         flag: document.getElementById("flagGK").value,
         club: document.getElementById("clubGK").value,
-        // positionPlayer: document.getElementById("positionPlayer").value,
+        positionPlayer: document.getElementById("positionPlayerGK").value,
 
         logo: document.getElementById("logoGK").value,
         rating: document.getElementById("ratingGK").value,

@@ -187,6 +187,7 @@ a {
 .images p {
 
     text-align: center;
+    padding: 3px;
 
 }
 
@@ -216,8 +217,7 @@ a {
 
 
 .drawar.active,
-.drawarGK.active
-.drawarR.drawar.active {
+.drawarGK.active .drawarR.drawar.active {
     display: block;
     opacity: 1;
     transform: translate(-50%, -50%);
@@ -282,7 +282,9 @@ button {
     margin: 2px;
     width: 100%;
     font-size: 0.9rem;
-}#submitButtonR {
+}
+
+#submitButtonR {
     background-color: #007bff;
     color: white;
     border: none;
@@ -335,7 +337,7 @@ h6 {
 }
 
 #myStockLw {
-height: 48%;
+    height: 30%;
     width: 83%;
 
 }
@@ -346,12 +348,12 @@ height: 48%;
 }
 
 #nameofPlayer p {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 
 #flagss {
-display: flex;
+    display: flex;
     justify-content: space-around;
     gap: 0.5rem;
     height: 17px;
