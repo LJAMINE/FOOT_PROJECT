@@ -10,7 +10,7 @@ const closemeGK = document.getElementById("closemeGK");
 const drawarGK = document.querySelector(".drawarGK");
 
 let currentPosition = "";
-// ------------------------empty----------------------
+// ------------------------empty fonction----------------------
 
 function clearCardData(card) {
     card.querySelector("#myplayerImage").innerText = "";
@@ -108,164 +108,174 @@ closemeButton.addEventListener("click", () => {
 submitButton.addEventListener("click", (event) => {
     event.preventDefault();
     const playerData = getPlayerData();
+    // const playerGKData = getGoalkeeperData();
 
 
 
     if (currentPosition === "remplacent1" || currentPosition === "remplacent2" || currentPosition === "remplacent3" || currentPosition === "remplacent4") {
 
 
+        if (playerData.positionPlayer === "GK") {
+            
+             
+alert("gk")
 
 
-        if (isPlayerinfoValid(playerData)) {
-            const selectedPositionCard = document.getElementById(currentPosition);
-
-
-
-            const stats = {
-                left: [
-                    { label: "DRI", value: playerData.dribbling },
-                    { label: "DEF", value: playerData.defending },
-                    { label: "PHY", value: playerData.physical }
-                ],
-                right: [
-                    { label: "PAC", value: playerData.pace },
-                    { label: "SHO", value: playerData.shooting },
-                    { label: "PAS", value: playerData.passing }
-                ]
-            };
-
-            clearCardData(selectedPositionCard);
-            updateCardData(selectedPositionCard, playerData, stats);
-
-            swal("Player added!", "You clicked add  button!", "success");
-
-            // supprimer add button
-            const addButton = selectedPositionCard.querySelector(".addButton");
-            addButton.style.display = "none";
-
-
-            // add delete et update button
-            const deleteButton = document.createElement("button");
-            deleteButton.innerText = "";
-            // deleteButton.classList.add("deleteButton");
-            deleteButton.setAttribute("class", "fa-solid fa-trash addButton")
-
-
-
-            selectedPositionCard.appendChild(deleteButton);
-
-
-            const updateButton = document.createElement("button");
-            updateButton.innerText = "";
-            // updateButton.classList.add("updatemostapha")
-            updateButton.setAttribute("class", "fa-solid fa-pen-to-square addButton")
-            selectedPositionCard.appendChild(updateButton)
-
-
-            // ----------updateButton dtn-----------------------------------------
-
-            updateButton.addEventListener("click", function () {
+            
+        } else {
+            if (isPlayerinfoValid(playerData)) {
                 const selectedPositionCard = document.getElementById(currentPosition);
 
-                swal({
-                    title: "Are you sure?",
-                    text: "Do you want to update the player data?",
-                    icon: "warning",
-                    buttons: ["Cancel", "Yes"],
-                    dangerMode: true,
-                }).then((willUpdate) => {
-                    if (willUpdate) {
-                        const playerData = getPlayerDataFromCard(selectedPositionCard);
-
-                        document.getElementById("name").value = playerData.name;
-                        document.getElementById("photo").value = playerData.photo;
-                        document.getElementById("flag").value = playerData.flag;
-                        document.getElementById("positionPlayer").value = playerData.positionPlayer;
-                        document.getElementById("club").value = playerData.club;
-                        document.getElementById("logo").value = playerData.logo;
-                        document.getElementById("rating").value = playerData.rating;
-                        document.getElementById("pace").value = playerData.pace;
-                        document.getElementById("shooting").value = playerData.shooting;
-                        document.getElementById("passing").value = playerData.passing;
-                        document.getElementById("dribbling").value = playerData.dribbling;
-                        document.getElementById("defending").value = playerData.defending;
-                        document.getElementById("physical").value = playerData.physical;
-
-                        drawar.style.display = "block";
-                        updateButton.style.display = "none";
-                        deleteButton.style.display = "none";
-
-                        swal("Success!", "Player data is ready to be updated!", "success");
-                    } else {
-                        // User canceled the update
-                        swal("Update canceled", "No changes were made.", "info");
-                    }
-                });
-            });
 
 
-            deleteButton.addEventListener("click", function () {
-                const selectedPositionCard = document.getElementById(currentPosition);
-
-                swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this player info!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        clearCardData(selectedPositionCard);
-
-                        const addButton = selectedPositionCard.querySelector(".addButton");
-                        if (addButton) {
-                            addButton.style.display = "block";
-                        }
-
-                        deleteButton.style.display = "none";
-                        updateButton.style.display = "none";
-
-                        swal("Your player file has been deleted!", {
-                            icon: "success",
-                        });
-
-                        // playerForm.reset();
-                        // drawar.style.display = "none";
-                    } else {
-                        swal("Your player info is safe!");
-                    }
-                });
-            });
-
-
-            function getPlayerDataFromCard(card) {
-                const playerData = {
-                    name: card.querySelector("#nameofPlayer").innerText,
-                    photo: card.querySelector("#myplayerImage img")?.src || '',
-                    flag: card.querySelector("#flagss img")?.src || '',
-                    positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
-                    club: card.querySelector("#club")?.innerText || '',
-                    logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
-                    rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
-                    pace: card.querySelector("#statsleft h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
-                    shooting: card.querySelector("#statsright h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
-                    passing: card.querySelector("#statsright h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
-                    dribbling: card.querySelector("#statsleft h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
-                    defending: card.querySelector("#statsleft h6:nth-child(3)")?.innerText.split(":")[1]?.trim() || '',
-                    physical: card.querySelector("#statsleft h6:nth-child(4)")?.innerText.split(":")[1]?.trim() || ''
+                const stats = {
+                    left: [
+                        { label: "DRI", value: playerData.dribbling },
+                        { label: "DEF", value: playerData.defending },
+                        { label: "PHY", value: playerData.physical }
+                    ],
+                    right: [
+                        { label: "PAC", value: playerData.pace },
+                        { label: "SHO", value: playerData.shooting },
+                        { label: "PAS", value: playerData.passing }
+                    ]
                 };
 
-                return playerData;
+                clearCardData(selectedPositionCard);
+                updateCardData(selectedPositionCard, playerData, stats);
+
+                swal("Player added!", "You clicked add  button!", "success");
+
+                // supprimer add button
+                const addButton = selectedPositionCard.querySelector(".addButton");
+                addButton.style.display = "none";
+
+
+                // add delete et update button
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "";
+                // deleteButton.classList.add("deleteButton");
+                deleteButton.setAttribute("class", "fa-solid fa-trash addButton")
+
+
+
+                selectedPositionCard.appendChild(deleteButton);
+
+
+                const updateButton = document.createElement("button");
+                updateButton.innerText = "";
+                // updateButton.classList.add("updatemostapha")
+                updateButton.setAttribute("class", "fa-solid fa-pen-to-square addButton")
+                selectedPositionCard.appendChild(updateButton)
+
+
+                // ----------updateButton dtn-----------------------------------------
+
+                updateButton.addEventListener("click", function () {
+                    const selectedPositionCard = document.getElementById(currentPosition);
+
+                    swal({
+                        title: "Are you sure?",
+                        text: "Do you want to update the player data?",
+                        icon: "warning",
+                        buttons: ["Cancel", "Yes"],
+                        dangerMode: true,
+                    }).then((willUpdate) => {
+                        if (willUpdate) {
+                            const playerData = getPlayerDataFromCard(selectedPositionCard);
+
+                            document.getElementById("name").value = playerData.name;
+                            document.getElementById("photo").value = playerData.photo;
+                            document.getElementById("flag").value = playerData.flag;
+                            document.getElementById("positionPlayer").value = playerData.positionPlayer;
+                            document.getElementById("club").value = playerData.club;
+                            document.getElementById("logo").value = playerData.logo;
+                            document.getElementById("rating").value = playerData.rating;
+                            document.getElementById("pace").value = playerData.pace;
+                            document.getElementById("shooting").value = playerData.shooting;
+                            document.getElementById("passing").value = playerData.passing;
+                            document.getElementById("dribbling").value = playerData.dribbling;
+                            document.getElementById("defending").value = playerData.defending;
+                            document.getElementById("physical").value = playerData.physical;
+
+                            drawar.style.display = "block";
+                            updateButton.style.display = "none";
+                            deleteButton.style.display = "none";
+
+                            swal("Success!", "Player data is ready to be updated!", "success");
+                        } else {
+                            // User canceled the update
+                            swal("Update canceled", "No changes were made.", "info");
+                        }
+                    });
+                });
+
+
+                deleteButton.addEventListener("click", function () {
+                    const selectedPositionCard = document.getElementById(currentPosition);
+
+                    swal({
+                        title: "Are you sure?",
+                        text: "Once deleted, you will not be able to recover this player info!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            clearCardData(selectedPositionCard);
+
+                            const addButton = selectedPositionCard.querySelector(".addButton");
+                            if (addButton) {
+                                addButton.style.display = "block";
+                            }
+
+                            deleteButton.style.display = "none";
+                            updateButton.style.display = "none";
+
+                            swal("Your player file has been deleted!", {
+                                icon: "success",
+                            });
+
+                            // playerForm.reset();
+                            // drawar.style.display = "none";
+                        } else {
+                            swal("Your player info is safe!");
+                        }
+                    });
+                });
+
+
+                function getPlayerDataFromCard(card) {
+                    const playerData = {
+                        name: card.querySelector("#nameofPlayer").innerText,
+                        photo: card.querySelector("#myplayerImage img")?.src || '',
+                        flag: card.querySelector("#flagss img")?.src || '',
+                        positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
+                        club: card.querySelector("#club")?.innerText || '',
+                        logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
+                        rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
+                        pace: card.querySelector("#statsleft h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                        shooting: card.querySelector("#statsright h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                        passing: card.querySelector("#statsright h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                        dribbling: card.querySelector("#statsleft h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                        defending: card.querySelector("#statsleft h6:nth-child(3)")?.innerText.split(":")[1]?.trim() || '',
+                        physical: card.querySelector("#statsleft h6:nth-child(4)")?.innerText.split(":")[1]?.trim() || ''
+                    };
+
+                    return playerData;
+                }
+
+
+                drawar.style.display = "none";
+                playerForm.reset();
+
+
             }
-
-
-            drawar.style.display = "none";
-            playerForm.reset();
-
-
-        } else {
-            swal("error!", "verify data input!", "error");
+            else {
+                swal("error!", "verify data input!", "error");
+            }
         }
+      
 
 
     } else {
@@ -698,4 +708,53 @@ function isGoalkeepeinfoValid(data) {
 }
 
 
+
+
 // --------------helper fonction-----------------------------------------------------------
+// --------------drag and drop-----------------------------------------------------------
+
+
+let firstSelectedCard = null; 
+
+document.querySelectorAll('.images').forEach(card => {
+    card.addEventListener('click', () => {
+        if (!firstSelectedCard) {
+
+            firstSelectedCard = card;
+            card.classList.add('selected'); 
+        } else if (firstSelectedCard !== card) {
+
+            swapCards(firstSelectedCard, card);
+            firstSelectedCard.classList.remove('selected'); 
+            firstSelectedCard = null; 
+        }
+    });
+});
+
+function swapCards(card1, card2) {
+    // Clone 
+    const card1Clone = card1.cloneNode(true);
+    const card2Clone = card2.cloneNode(true);
+
+    // remplace card avec clonecard
+    card1.replaceWith(card2Clone);
+
+    card2.replaceWith(card1Clone);
+
+    attachEventListeners(card1Clone);
+    attachEventListeners(card2Clone);
+}
+
+function attachEventListeners(card) {
+    card.addEventListener('click', () => {
+        if (!firstSelectedCard) {
+            firstSelectedCard = card;
+            card.classList.add('selected');
+        } else if (firstSelectedCard !== card) {
+            swapCards(firstSelectedCard, card);
+            firstSelectedCard.classList.remove('selected');
+            firstSelectedCard = null;
+        }
+    });
+}
+// --------------drag and drop-----------------------------------------------------------
