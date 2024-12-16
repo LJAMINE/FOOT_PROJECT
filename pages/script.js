@@ -27,6 +27,7 @@ function clearCardData(card) {
 
 
 function updateCardData(card, playerData, stats) {
+
     const playerImageContainer = card.querySelector("#myplayerImage");
     playerImageContainer.innerText = "";
     const img = document.createElement("img");
@@ -77,10 +78,12 @@ function updateCardData(card, playerData, stats) {
 
     // flag , club Logo
     const flagContainer = card.querySelector("#flagss");
+
     flagContainer.innerText = "";
     const flag = document.createElement("img");
     flag.src = playerData.flag;
     flagContainer.appendChild(flag);
+
     const logo = document.createElement("img");
     logo.src = playerData.logo;
     flagContainer.appendChild(logo);
@@ -89,8 +92,8 @@ function updateCardData(card, playerData, stats) {
 // ------------------------ end function info first ----------------------
 // ------------------------function players----------------------
 
-const positionLabel = document.getElementById('positionLabel');
-const positionSelect = document.getElementById('positionPlayer');
+// const positionLabel = document.getElementById('positionLabel');
+// const positionSelect = document.getElementById('positionPlayer');
 
 addButton.forEach(button => {
     button.addEventListener("click", (event) => {
@@ -108,21 +111,170 @@ closemeButton.addEventListener("click", () => {
 submitButton.addEventListener("click", (event) => {
     event.preventDefault();
     const playerData = getPlayerData();
-    // const playerGKData = getGoalkeeperData();
+
+  
 
 
 
     if (currentPosition === "remplacent1" || currentPosition === "remplacent2" || currentPosition === "remplacent3" || currentPosition === "remplacent4") {
 
 
-        if (playerData.positionPlayer === "GK") {
+        
+
+//REMPLACENT AND GK--------
+        if (playerData.positionPlayer === "GK") {    
             
+            if (isPlayerinfoValid(playerData)) {
+                const selectedPositionCard = document.getElementById(currentPosition);
+
+
+
+                const stats = {
+                    left: [
+                        { label: "DIV", value: playerData.dribbling },
+                        { label: "HAN", value: playerData.defending },
+                        { label: "KIC", value: playerData.physical }
+                    ],
+                    right: [
+                        { label: "REF", value: playerData.pace },
+                        { label: "SPE", value: playerData.shooting },
+                        { label: "POS", value: playerData.passing }
+                    ]
+                };
              
-alert("gk")
+
+                clearCardData(selectedPositionCard);
+                updateCardData(selectedPositionCard, playerData, stats);
+
+                swal("Player added!", "You clicked add  button!", "success");
+
+                // supprimer add button
+                const addButton = selectedPositionCard.querySelector(".addButton");
+                addButton.style.display = "none";
 
 
-            
+                // add delete et update button
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "";
+                deleteButton.setAttribute("class", "fa-solid fa-trash addButton")
+                selectedPositionCard.appendChild(deleteButton);
+
+
+                const updateButton = document.createElement("button");
+                updateButton.innerText = "";
+                updateButton.setAttribute("class", "fa-solid fa-pen-to-square addButton")
+                selectedPositionCard.appendChild(updateButton)
+
+
+                // ----------updateButton dtn-----------------------------------------
+
+                updateButton.addEventListener("click", function () {
+                    const selectedPositionCard = document.getElementById(currentPosition);
+
+                    swal({
+                        title: "Are you sure?",
+                        text: "Do you want to update the player data?",
+                        icon: "warning",
+                        buttons: ["Cancel", "Yes"],
+                        dangerMode: true,
+                    }).then((willUpdate) => {
+                        if (willUpdate) {
+                            const playerData = getPlayerDataFromCard(selectedPositionCard);
+
+                            document.getElementById("name").value = playerData.name;
+                            document.getElementById("photo").value = playerData.photo;
+                            document.getElementById("flag").value = playerData.flag;
+                            document.getElementById("positionPlayer").value = playerData.positionPlayer;
+                            document.getElementById("club").value = playerData.club;
+                            document.getElementById("logo").value = playerData.logo;
+                            document.getElementById("rating").value = playerData.rating;
+                            document.getElementById("pace").value = playerData.pace;
+                            document.getElementById("shooting").value = playerData.shooting;
+                            document.getElementById("passing").value = playerData.passing;
+                            document.getElementById("dribbling").value = playerData.dribbling;
+                            document.getElementById("defending").value = playerData.defending;
+                            document.getElementById("physical").value = playerData.physical;
+
+                            drawar.style.display = "block";
+                            updateButton.style.display = "none";
+                            deleteButton.style.display = "none";
+
+                            swal("Success!", "Player data is ready to be updated!", "success");
+                        } else {
+                            swal("Update canceled", "No changes were made.", "info");
+                        }
+                    });
+                });
+
+
+                deleteButton.addEventListener("click", function () {
+                    const selectedPositionCard = document.getElementById(currentPosition);
+
+                    swal({
+                        title: "Are you sure?",
+                        text: "Once deleted, you will not be able to recover this player info!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            clearCardData(selectedPositionCard);
+
+                            const addButton = selectedPositionCard.querySelector(".addButton");
+                            if (addButton) {
+                                addButton.style.display = "block";
+                            }
+
+                            deleteButton.style.display = "none";
+                            updateButton.style.display = "none";
+
+                            swal("Your player file has been deleted!", {
+                                icon: "success",
+                            });
+
+                            // playerForm.reset();
+                            // drawar.style.display = "none";
+                        } else {
+                            swal("Your player info is safe!");
+                        }
+                    });
+                });
+
+
+                function getPlayerDataFromCard(card) {
+                    const playerData = {
+                        name: card.querySelector("#nameofPlayer").innerText,
+                        photo: card.querySelector("#myplayerImage img")?.src || '',
+                        flag: card.querySelector("#flagss img")?.src || '',
+                        positionPlayer: card.querySelector("#remplacenPosition p")?.innerText || '',
+                        club: card.querySelector("#club")?.innerText || '',
+                        logo: card.querySelector("#flagss img:nth-child(2)")?.src || '',
+                        rating: card.querySelector("#ratingss p")?.innerText.split(":")[1]?.trim() || '',
+                        pace: card.querySelector("#statsleft h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                        shooting: card.querySelector("#statsright h6:nth-child(1)")?.innerText.split(":")[1]?.trim() || '',
+                        passing: card.querySelector("#statsright h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                        dribbling: card.querySelector("#statsleft h6:nth-child(2)")?.innerText.split(":")[1]?.trim() || '',
+                        defending: card.querySelector("#statsleft h6:nth-child(3)")?.innerText.split(":")[1]?.trim() || '',
+                        physical: card.querySelector("#statsleft h6:nth-child(4)")?.innerText.split(":")[1]?.trim() || ''
+                    };
+
+                    return playerData;
+                }
+
+
+                drawar.style.display = "none";
+                playerForm.reset()
+
+
+            }
+
+
+            // end REMPLACENT AND GK---------------------------------
+
         } else {
+            //  REMPLACENT AND NOT GK--------------------------------------
+
+
             if (isPlayerinfoValid(playerData)) {
                 const selectedPositionCard = document.getElementById(currentPosition);
 
@@ -276,10 +428,12 @@ alert("gk")
             }
         }
       
-
+        // end REMPLACENT AND NOT GK--------------------------------------
 
     } else {
 
+
+        //starters player ------------------------------
 
         if (currentPosition !== playerData.positionPlayer) {
             swal("error!", "not the same position!", "error");
@@ -438,6 +592,8 @@ alert("gk")
 
 
     }
+    //end starters player ------------------------------
+
 
 
 
@@ -461,6 +617,7 @@ closemeGK.addEventListener("click", () => {
 submitButtonGK.addEventListener("click", (event) => {
     event.preventDefault();
     const goalkeeperData = getGoalkeeperData();
+ 
     if (currentPosition !== goalkeeperData.positionPlayer) {
 
         swal("error!", "not the same position!", "error");
@@ -499,16 +656,14 @@ submitButtonGK.addEventListener("click", (event) => {
             //add delete et update button
             const deleteButton = document.createElement("button");
             deleteButton.innerText = "";
-            // deleteButton.classList.add("deleteButton");
-            deleteButton.setAttribute("class", "fa-solid fa-trash clickGK")
+             deleteButton.setAttribute("class", "fa-solid fa-trash clickGK")
 
             selectedPositionCard.appendChild(deleteButton);
 
 
             const updateButton = document.createElement("button");
             updateButton.innerText = "";
-            // updateButton.classList.add("updateButton")
-            updateButton.setAttribute("class", "fa-solid fa-pen-to-square clickGK")
+             updateButton.setAttribute("class", "fa-solid fa-pen-to-square clickGK")
 
             selectedPositionCard.appendChild(updateButton)
 
@@ -672,13 +827,16 @@ function isValidUrl(value) {
     }
 }
 
+const nomeVleur = /^[A-Za-z\s]+$/; 
 
 function isPlayerinfoValid(data) {
     return (
         data.name &&
+        nomeVleur.test(data.name)&&
         isValidUrl(data.photo) &&
         isValidUrl(data.flag) &&
         data.club &&
+        nomeVleur.test(data.club) &&
         isValidUrl(data.logo) &&
         data.rating > 0 && data.rating <= 99 &&
         data.pace > 0 && data.pace <= 99 &&
@@ -758,3 +916,8 @@ function attachEventListeners(card) {
     });
 }
 // --------------drag and drop-----------------------------------------------------------
+
+
+//example
+
+
