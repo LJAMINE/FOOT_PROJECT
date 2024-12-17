@@ -133,50 +133,63 @@ if (isset($_GET['id'])) {
     <title>Dashboard Example</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            background-color: rgb(244, 248, 248);
+            background-color: #f0f4f4;
+            line-height: 1.6;
+            color: #333;
         }
 
         .error {
-            color: red;
+            color: #e74c3c;
             font-size: 14px;
             margin-top: -10px;
+            font-weight: 500;
         }
 
         .sidebar {
-            width: 250px;
+            width: 180px;
             background-color: #2c3e50;
             color: white;
-            height: 500vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 20px;
+            padding-top: 30px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            left: 0;
+            top: 0;
         }
 
         .sidebar button {
             background-color: #3498db;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 20px;
             margin: 10px 0;
             cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         .sidebar button:hover {
             background-color: #2980b9;
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .content {
             flex-grow: 1;
-            padding: 20px;
+            /* margin-left: 160px; */
+            width: calc(100% - 0px);
         }
 
         .drawer {
@@ -185,44 +198,47 @@ if (isset($_GET['id'])) {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #fff;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background: #ffffff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
-            width: 650px;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 1000;
         }
 
         .drawer.active {
             display: block;
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
         }
 
         table {
-            width: 100%;
+            width: 80%;
+            margin: 20px auto;
             border-collapse: collapse;
-            margin-top: 20px;
-            background-color: #fff;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #ccc;
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         th,
         td {
             padding: 10px;
-            text-align: left;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+
         }
 
         th {
-            background-color: #3498db;
-            color: white;
-            font-size: 14px;
+            font-size: 12px;
         }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+
 
         tbody tr:nth-child(even) {
             background-color: #f9f9f9;
@@ -233,9 +249,9 @@ if (isset($_GET['id'])) {
         }
 
         form {
-            display: grid;
+            /* display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 20px;
+            gap: 20px; */
         }
 
         form label {
@@ -243,25 +259,26 @@ if (isset($_GET['id'])) {
             font-size: 14px;
             color: #34495e;
             margin-bottom: 5px;
+            font-weight: 600;
         }
 
         form input,
         form select,
         form button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 14px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         form input:focus,
         form select:focus {
             border-color: #3498db;
             outline: none;
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
         }
 
         #closeme {
@@ -280,34 +297,39 @@ if (isset($_GET['id'])) {
             background-color: #c0392b;
         }
 
-        form button {
+        form button[type="submit"] {
             background-color: #3498db;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 12px;
             cursor: pointer;
             border-radius: 8px;
             font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: 600;
         }
 
-        form button:hover {
+        form button[type="submit"]:hover {
             background-color: #2980b9;
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 
 <body>
     <div class="sidebar">
-        <button id="ajouterButton">Ajouter</button>
+        <button id="ajouterButton">Add player</button>
+        <button id="ajouterButton">add nation</button>
+        <button id="ajouterButton">add club</button>
         <button id="logoutButton">Logout</button>
     </div>
 
     <div class="content">
-        <h1>Welcome to the Dashboard</h1>
+        <h1>Welcome to the Admin Dashboard</h1>
 
-        <h2>Players Table</h2>
+        <!-- <h2>Players Table</h2> -->
         <table>
             <thead>
                 <tr>
@@ -323,7 +345,7 @@ if (isset($_GET['id'])) {
                     <th>Dribbling</th>
                     <th>Defending</th>
                     <th>Physical</th>
-                    <th>add</th>
+                    <th>update</th>
                     <th>delete</th>
                 </tr>
             </thead>
@@ -342,10 +364,20 @@ if (isset($_GET['id'])) {
                         <td><?php echo ($player['dribbling'])  ?></td>
                         <td><?php echo ($player['defending'])  ?></td>
                         <td><?php echo ($player['physical'])  ?></td>
-                        <form action="dashboard.php" method="POST">
-                            <td><input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>"></td>
-                            <td><input type="submit" name="delete" value="delete"></td>
-                        </form>
+                        <td>
+                            <form action="dashboard.php" method="POST">
+                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
+                                <input type="submit" name="update" value="update">
+                            </form>
+                        </td>
+
+                        <td>
+                            <form action="dashboard.php" method="POST">
+                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
+                                <input type="submit" name="delete" value="delete">
+                            </form>
+                        </td>
+
 
 
                     </tr>
