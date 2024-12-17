@@ -8,7 +8,7 @@ if (!$conn) {
 }
 
 //query for all players
-$sql = 'SELECT photo,nom,position,club_name,flag_name,rating,pace,shooting,passing,dribbling,defending,physical
+$sql = 'SELECT id,photo,nom,position,url_club,url_flag,rating,pace,shooting,passing,dribbling,defending,physical
 FROM players
 INNER JOIN club 
 ON players.id_club=club.id_club
@@ -24,9 +24,6 @@ $myplayers = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 //free result from memory 
 mysqli_free_result($result);
-
-//clode 
-
 
 // print_r($myplayers);
 
@@ -61,11 +58,12 @@ if (isset($_POST['submit'])) {
     if (array_filter($errors)) {
         // echo 'errors in the form';
     } else {
-        echo ' form is valid';
+        // echo ' form is valid';
         $name = $_POST['name'];
         $photo = $_POST['photo'];
         $flag = $_POST['flag'];
-        $logo = $_POST['logo'];
+        $club = $_POST['club'];
+        $position = $_POST['position'];
         $rating = $_POST['rating'];
         $pace = $_POST['pace'];
         $shooting = $_POST['shooting'];
@@ -75,21 +73,55 @@ if (isset($_POST['submit'])) {
         $physical = $_POST['physical'];
 
         // Example query
-        $sql_insert = "INSERT INTO players (name, photo, flag, logo, rating, pace, shooting, passing, dribbling, defending, physical)
-               VALUES ('$name', '$photo', '$flag', '$logo', '$rating', '$pace', '$shooting', '$passing', '$dribbling', '$defending', '$physical')";
+        $sql_insert = "INSERT INTO players (nom, photo,id_flag, id_club, position,rating, pace, shooting, passing, dribbling, defending, physical)
+               VALUES ('$name', '$photo', '$flag', '$club','$position', '$rating', '$pace', '$shooting', '$passing', '$dribbling', '$defending', '$physical')";
+        $result = mysqli_query($conn, $sql_insert);
 
-        echo ' form is valid2';
-    }
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';
+
+        // echo ' form is valid2';
     }
 
 
 
     mysqli_close($conn);
 }
+
+//deletefunction------------------------
+
+if (isset($_POST['delete'])) {
+    $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
+    echo "Deleting ID: $id_to_delete";
+    $sql = "DELETE FROM players WHERE id=$id_to_delete ";
+    if (mysqli_query($conn, $sql)) {
+        echo "Delete successful.";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
+
+
+if (isset($_GET['id'])) {
+    $id = mysqli_real_escape_string($conn, $_GET['id']);
+
+
+    if (!empty($id_to_delete)) {
+        $sql = "DELETE FROM players WHERE id=$id_to_delete";
+        mysqli_query($conn, $sql);
+    } else {
+        echo 'Error: ID to delete is not set or invalid.';
+    }
+    //get the query result
+    $result = mysqli_query($conn, $sql);
+
+    //fetch result in array formatt
+    $plyer = mysqli_fetch_assoc($result);
+
+
+    mysqli_free_result($result);
+    mysqli_close($conn);
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -105,6 +137,7 @@ if (isset($_POST['submit'])) {
             margin: 0;
             padding: 0;
             display: flex;
+            background-color: rgb(244, 248, 248);
         }
 
         .error {
@@ -117,7 +150,7 @@ if (isset($_POST['submit'])) {
             width: 250px;
             background-color: #2c3e50;
             color: white;
-            height: 100vh;
+            height: 500vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -128,16 +161,17 @@ if (isset($_POST['submit'])) {
             background-color: #3498db;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             margin: 10px 0;
             cursor: pointer;
             border-radius: 5px;
             font-size: 16px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .sidebar button:hover {
             background-color: #2980b9;
+            transform: scale(1.05);
         }
 
         .content {
@@ -151,21 +185,25 @@ if (isset($_POST['submit'])) {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #f7f9fc;
+            background: #fff;
             padding: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             border-radius: 15px;
             width: 650px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .drawer.active {
             display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            background-color: #fff;
         }
 
         table,
@@ -183,6 +221,15 @@ if (isset($_POST['submit'])) {
         th {
             background-color: #3498db;
             color: white;
+            font-size: 14px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
         }
 
         form {
@@ -207,6 +254,7 @@ if (isset($_POST['submit'])) {
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 14px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         form input:focus,
@@ -240,11 +288,12 @@ if (isset($_POST['submit'])) {
             cursor: pointer;
             border-radius: 8px;
             font-size: 16px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         form button:hover {
             background-color: #2980b9;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -265,8 +314,8 @@ if (isset($_POST['submit'])) {
                     <th>Image</th>
                     <th>Name</th>
                     <th>Position</th>
-                    <th>flag_name</th>
-                    <th>club_name</th>
+                    <th>club</th>
+                    <th>flag</th>
                     <th>Rating</th>
                     <th>Pace</th>
                     <th>Shooting</th>
@@ -274,6 +323,8 @@ if (isset($_POST['submit'])) {
                     <th>Dribbling</th>
                     <th>Defending</th>
                     <th>Physical</th>
+                    <th>add</th>
+                    <th>delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -282,8 +333,8 @@ if (isset($_POST['submit'])) {
                         <td><img src="<?php echo $player['photo']; ?>" alt="Player Image" style="width: 50px; height: 50px;"></td>
                         <td><?php echo ($player['nom'])  ?></td>
                         <td><?php echo ($player['position'])  ?></td>
-                        <td><?php echo ($player['club_name'])  ?></td>
-                        <td><?php echo ($player['flag_name'])  ?></td>
+                        <td><img src="<?php echo $player['url_club']; ?>" alt="Player Image" style="width: 50px; height: 50px;"></td>
+                        <td><img src="<?php echo $player['url_flag']; ?>" alt="Player Image" style="width: 50px; height: 50px;"></td>
                         <td><?php echo ($player['rating'])  ?></td>
                         <td><?php echo ($player['pace'])  ?></td>
                         <td><?php echo ($player['shooting'])  ?></td>
@@ -291,6 +342,11 @@ if (isset($_POST['submit'])) {
                         <td><?php echo ($player['dribbling'])  ?></td>
                         <td><?php echo ($player['defending'])  ?></td>
                         <td><?php echo ($player['physical'])  ?></td>
+                        <form action="dashboard.php" method="POST">
+                            <td><input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>"></td>
+                            <td><input type="submit" name="delete" value="delete"></td>
+                        </form>
+
 
                     </tr>
 
@@ -315,28 +371,40 @@ if (isset($_POST['submit'])) {
             <label for="photo">Photo URL</label>
             <input type="url" id="photo" name="photo" placeholder="https://example.com/photo.png">
 
-            <label for="flag" name="flag">flag</label>
-            <select id="flag">
-                <option value="spain">spain</option>
-                <option value="England">England</option>
-                <option value="France">France</option>
-                <option value="Argentina">Argentina</option>
-              
+            <label for="flag">flag</label>
+            <select id="flag" name="flag">
+                <option value="1">spain</option>
+                <option value="2">England</option>
+                <option value="3">France</option>
+                <option value="4">Argentina</option>
+                <option value="5">Juventus</option>
+                <option value="6">Bayern Munich</option>
+                <option value="7">Chelsea</option>
+                <option value="8">Liverpool</option>
+                <option value="9">Arsenal</option>
+                <option value="10">Tottenham Hotspur</option>
+
             </select>
 
 
 
-            <label for="club" name="club">club</label>
-            <select id="club">
-                <option value="Real Madrid">Real Madrid</option>
-                <option value="FC Barcelona">FC Barcelona</option>
-                <option value="Manchester United">Manchester United</option>
-                <option value="Argentina">Argentina</option>
-               
+            <label for="club">club</label>
+            <select id="club" name="club">
+                <option value="1">Real Madrid</option>
+                <option value="2">FC Barcelona</option>
+                <option value="3">Manchester United</option>
+                <option value="4">Argentina</option>
+                <option value="5">Italy</option>
+                <option value="6">Germany</option>
+                <option value="7">Portugal</option>
+                <option value="8">Brazil</option>
+                <option value="9">Netherlands</option>
+                <option value="10">Belgium</option>
+
             </select>
 
-            <label for="position" name="position">Position</label>
-            <select id="positionPlayer">
+            <label for="position">Position</label>
+            <select id="positionPlayer" name="position">
                 <option value="GK">GK</option>
                 <option value="CBR">CBR</option>
                 <option value="CBL">CBL</option>
@@ -396,5 +464,7 @@ if (isset($_POST['submit'])) {
         });
     </script>
 </body>
+
+</html>
 
 </html>
