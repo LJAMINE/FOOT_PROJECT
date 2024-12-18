@@ -14,6 +14,7 @@ INNER JOIN club
 ON players.id_club=club.id_club
 INNER JOIN flag 
 ON players.id_flag=flag.id_flag
+WHERE position<>"GK"
 ';
 
 //make query and get result
@@ -26,6 +27,26 @@ $myplayers = mysqli_fetch_all($result, MYSQLI_ASSOC);
 mysqli_free_result($result);
 
 // print_r($myplayers);
+
+
+//requete GK
+$sqlGK = 'SELECT id,photo,nom,position,url_club,url_flag,rating,diving,handling,kicking,reflexes,speed,positioning
+FROM players
+INNER JOIN club 
+ON players.id_club=club.id_club
+INNER JOIN flag 
+ON players.id_flag=flag.id_flag
+WHERE position="GK"
+';
+
+//make query and get result
+$newresult = mysqli_query($conn,   $sqlGK);
+
+//fetch as row of array
+$myplayersGK = mysqli_fetch_all($newresult, MYSQLI_ASSOC);
+
+//free result from memory 
+mysqli_free_result($newresult);
 
 
 //create and send data to sql----------------
@@ -55,8 +76,29 @@ if (isset($_POST['submit'])) {
             $errors['rating'] = 'Rating must be a number between 0 and 100';
         }
     }
+
+    $position = $_POST['position'];
     if (array_filter($errors)) {
         // echo 'errors in the form';
+
+    } elseif ($position == "GK") {
+        $name = $_POST['name'];
+        $photo = $_POST['photo'];
+        $flag = $_POST['flag'];
+        $club = $_POST['club'];
+        $position = $_POST['position'];
+        $rating = $_POST['rating'];
+        $diving = $_POST['diving'];
+        $handling = $_POST['handling'];
+        $kicking = $_POST['kicking'];
+        $reflexes = $_POST['reflexes'];
+        $speed = $_POST['speed'];
+        $positioning = $_POST['positioning'];
+
+        // Example query
+        $sql_insert = "INSERT INTO players (nom, photo,id_flag, id_club, position,rating, diving, handling, kicking, reflexes, speed, positioning)
+               VALUES ('$name', '$photo', '$flag', '$club','$position', '$rating', '$diving', '$handling', '$kicking', '$reflexes', '$speed', '$positioning')";
+        $result = mysqli_query($conn, $sql_insert);
     } else {
         // echo ' form is valid';
         $name = $_POST['name'];
@@ -80,11 +122,12 @@ if (isset($_POST['submit'])) {
 
         // echo ' form is valid2';
     }
-
-
-
-    mysqli_close($conn);
 }
+
+
+
+
+mysqli_close($conn);
 
 //deletefunction------------------------
 
@@ -100,26 +143,9 @@ if (isset($_POST['delete'])) {
 }
 
 
-if (isset($_GET['id'])) {
-    $id = mysqli_real_escape_string($conn, $_GET['id']);
+//------update----------------------------
 
 
-    if (!empty($id_to_delete)) {
-        $sql = "DELETE FROM players WHERE id=$id_to_delete";
-        mysqli_query($conn, $sql);
-    } else {
-        echo 'Error: ID to delete is not set or invalid.';
-    }
-    //get the query result
-    $result = mysqli_query($conn, $sql);
-
-    //fetch result in array formatt
-    $plyer = mysqli_fetch_assoc($result);
-
-
-    mysqli_free_result($result);
-    mysqli_close($conn);
-}
 
 
 
@@ -140,6 +166,8 @@ if (isset($_GET['id'])) {
             background-color: #f0f4f4;
             line-height: 1.6;
             color: #333;
+            overflow-y: scroll;
+
         }
 
         .error {
@@ -187,9 +215,8 @@ if (isset($_GET['id'])) {
         }
 
         .content {
-            flex-grow: 1;
-            /* margin-left: 160px; */
-            width: calc(100% - 0px);
+            margin-left: 180px;
+            padding: 20px;
         }
 
         .drawer {
@@ -213,7 +240,9 @@ if (isset($_GET['id'])) {
         }
 
         table {
-            width: 80%;
+            /* margin: 20px auto; */
+            table-layout: fixed;
+            width: 100%;
             margin: 20px auto;
             border-collapse: collapse;
             background-color: #ffffff;
@@ -248,7 +277,7 @@ if (isset($_GET['id'])) {
             background-color: #f1f1f1;
         }
 
-        form {
+        form #playerForm {
             /* display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 20px; */
@@ -321,8 +350,8 @@ if (isset($_GET['id'])) {
 <body>
     <div class="sidebar">
         <button id="ajouterButton">Add player</button>
-        <button id="ajouterButton">add nation</button>
-        <button id="ajouterButton">add club</button>
+        <button id="">add nation</button>
+        <button id="">add club</button>
         <button id="logoutButton">Logout</button>
     </div>
 
@@ -388,12 +417,75 @@ if (isset($_GET['id'])) {
 
             </tbody>
         </table>
+
+        <h1>GK DATA</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>club</th>
+                    <th>flag</th>
+                    <th>Rating</th>
+                    <th>diving</th>
+                    <th>handling</th>
+                    <th>kicking</th>
+                    <th>reflexes</th>
+                    <th>speed</th>
+                    <th>positioning</th>
+                    <th>update</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($myplayersGK as $player) { ?>
+                    <tr>
+                        <td><img src="<?php echo $player['photo']; ?>" alt="Player Image" style="width: 50px; height: 50px;"></td>
+                        <td><?php echo ($player['nom'])  ?></td>
+                        <td><?php echo ($player['position'])  ?></td>
+                        <td><img src="<?php echo $player['url_club']; ?>" alt="Player Image" style="width: 50px; height: 50px;"></td>
+                        <td><img src="<?php echo $player['url_flag']; ?>" alt="Player Image" style="width: 50px; height: 50px;"></td>
+                        <td><?php echo ($player['rating'])  ?></td>
+                        <td><?php echo ($player['diving'])  ?></td>
+                        <td><?php echo ($player['handling'])  ?></td>
+                        <td><?php echo ($player['kicking'])  ?></td>
+                        <td><?php echo ($player['reflexes'])  ?></td>
+                        <td><?php echo ($player['speed'])  ?></td>
+                        <td><?php echo ($player['positioning'])  ?></td>
+                        <td>
+
+                            <form action="dashboard.php" method="POST">
+                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
+                                <input type="submit" name="update" value="update">
+                            </form>
+                        </td>
+
+                        <td>
+                            <form action="dashboard.php" method="POST">
+                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
+                                <input type="submit" name="delete" value="delete">
+                            </form>
+                        </td>
+
+
+
+                    </tr>
+
+
+
+                <?php } ?>
+
+            </tbody>
+        </table>
     </div>
 
     <div class="drawer" id="formDrawer">
         <button id="closeme">Close</button>
         <form id="playerForm" action="dashboard.php" method="POST">
             <label for="name">Name</label>
+
             <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name) ?>" placeholder="Player Name">
             <?php if (!empty($errors['name'])): ?>
                 <div class="error"><?php echo $errors['name']; ?></div>
@@ -435,45 +527,48 @@ if (isset($_GET['id'])) {
 
             </select>
 
-            <label for="position">Position</label>
+            <label for="rating">Rating</label>
+            <input type="number" id="rating" name="rating" value="<?php echo $rating ?>" placeholder="Overall Rating">
+
+            <label for="positionPlayer">Position:</label>
             <select id="positionPlayer" name="position">
-                <option value="GK">GK</option>
+                <option value="ST">ST</option>
+                <option value="RW">RW</option>
+                <option value="LW">LW</option>
+                <option value="CM">CM</option>
+                <option value="RM">RM</option>
+                <option value="LM">LM</option>
                 <option value="CBR">CBR</option>
                 <option value="CBL">CBL</option>
                 <option value="LB">LB</option>
                 <option value="RB">RB</option>
-                <option value="CM">CM</option>
-                <option value="RM">RM</option>
-                <option value="LM">LM</option>
-                <option value="RW">RW</option>
-                <option value="LW">LW</option>
-                <option value="ST">ST</option>
+
+                <option value="GK">GK</option>
+
             </select>
 
-            <label for="rating">Rating</label>
-            <input type="number" id="rating" name="rating" value="<?php echo $rating ?>" placeholder="Overall Rating">
+            <div id="player-stats">
+                <label for="stat1" id="label1">Pace:</label>
+                <input type="number" id="stat1" name="pace"><br>
 
-            <label for="pace">Pace</label>
-            <input type="number" id="pace" name="pace" placeholder="Pace">
+                <label for="stat2" id="label2">Shooting:</label>
+                <input type="number" id="stat2" name="shooting"><br>
 
-            <label for="shooting">Shooting</label>
-            <input type="number" id="shooting" name="shooting" placeholder="Shooting">
+                <label for="stat3" id="label3">Passing:</label>
+                <input type="number" id="stat3" name="passing"><br>
 
-            <label for="passing">Passing</label>
-            <input type="number" id="passing" name="passing" placeholder="Passing">
+                <label for="stat4" id="label4">Dribbling:</label>
+                <input type="number" id="stat4" name="dribbling"><br>
 
-            <label for="dribbling">Dribbling</label>
-            <input type="number" id="dribbling" name="dribbling" placeholder="Dribbling">
+                <label for="stat5" id="label5">Defending:</label>
+                <input type="number" id="stat5" name="defending"><br>
 
-            <label for="defending">Defending</label>
-            <input type="number" id="defending" name="defending" placeholder="Defending">
-
-            <label for="physical">Physical</label>
-            <input type="number" id="physical" name="physical" placeholder="Physical">
+                <label for="stat6" id="label6">Physical:</label>
+                <input type="number" id="stat6" name="physical"><br>
+            </div>
 
             <input type="submit" name="submit" value="submit">
 
-            <!-- <button type="submit">Add Player</button> -->
         </form>
     </div>
 
@@ -493,6 +588,50 @@ if (isset($_GET['id'])) {
         const logoutButton = document.getElementById('logoutButton');
         logoutButton.addEventListener('click', () => {
             window.location.href = 'index.html';
+        });
+
+
+        document.getElementById('positionPlayer').addEventListener('change', function() {
+            const position = this.value;
+
+             const stats = {
+                default: {
+                    labels: ["Pace", "Shooting", "Passing", "Dribbling", "Defending", "Physical"],
+                    names: ["pace", "shooting", "passing", "dribbling", "defending", "physical"]
+                },
+                GK: {
+                    labels: ["Diving", "Handling", "Kicking", "Reflexes", "Speed", "Positioning"],
+                    names: ["diving", "handling", "kicking", "reflexes", "speed", "positioning"]
+                }
+            };
+
+            const selectedStats = stats[position] || stats.default;
+
+             const labelElements = [
+                document.getElementById('label1'),
+                document.getElementById('label2'),
+                document.getElementById('label3'),
+                document.getElementById('label4'),
+                document.getElementById('label5'),
+                document.getElementById('label6')
+            ];
+
+            const inputElements = [
+                document.getElementById('stat1'),
+                document.getElementById('stat2'),
+                document.getElementById('stat3'),
+                document.getElementById('stat4'),
+                document.getElementById('stat5'),
+                document.getElementById('stat6')
+            ];
+
+            labelElements.forEach((label, index) => {
+                label.textContent = selectedStats.labels[index];
+            });
+
+            inputElements.forEach((input, index) => {
+                input.name = selectedStats.names[index];
+            });
         });
     </script>
 </body>
