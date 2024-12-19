@@ -49,85 +49,10 @@ $myplayersGK = mysqli_fetch_all($newresult, MYSQLI_ASSOC);
 mysqli_free_result($newresult);
 
 
-//create and send data to sql----------------
-
-if (isset($_POST['submit'])) {
-
-
-    $errors = array('name' => '', 'photo' => '', 'flag' => '');
 
 
 
 
-    if (empty($_POST['name'])) {
-        $errors['name'] = 'name is required <br />';
-    } else {
-        $name = $_POST['name'];
-        if (!preg_match('/^[a-zA-Z\s]+$/', $name)) {
-            $errors['name'] = 'name must be letters and spaces ';
-        }
-    }
-
-    if (empty($_POST['rating'])) {
-        $errors['rating'] = 'Rating is required <br />';
-    } else {
-        $rating = $_POST['rating'];
-        if (!is_numeric($rating) || $rating < 0 || $rating > 100) {
-            $errors['rating'] = 'Rating must be a number between 0 and 100';
-        }
-    }
-
-    $position = $_POST['position'];
-    if (array_filter($errors)) {
-        // echo 'errors in the form';
-
-    } elseif ($position == "GK") {
-        $name = $_POST['name'];
-        $photo = $_POST['photo'];
-        $flag = $_POST['flag'];
-        $club = $_POST['club'];
-        $position = $_POST['position'];
-        $rating = $_POST['rating'];
-        $diving = $_POST['diving'];
-        $handling = $_POST['handling'];
-        $kicking = $_POST['kicking'];
-        $reflexes = $_POST['reflexes'];
-        $speed = $_POST['speed'];
-        $positioning = $_POST['positioning'];
-
-        // Example query
-        $sql_insert = "INSERT INTO players (nom, photo,id_flag, id_club, position,rating, diving, handling, kicking, reflexes, speed, positioning)
-               VALUES ('$name', '$photo', '$flag', '$club','$position', '$rating', '$diving', '$handling', '$kicking', '$reflexes', '$speed', '$positioning')";
-        $result = mysqli_query($conn, $sql_insert);
-    } else {
-        // echo ' form is valid';
-        $name = $_POST['name'];
-        $photo = $_POST['photo'];
-        $flag = $_POST['flag'];
-        $club = $_POST['club'];
-        $position = $_POST['position'];
-        $rating = $_POST['rating'];
-        $pace = $_POST['pace'];
-        $shooting = $_POST['shooting'];
-        $passing = $_POST['passing'];
-        $dribbling = $_POST['dribbling'];
-        $defending = $_POST['defending'];
-        $physical = $_POST['physical'];
-
-        // Example query
-        $sql_insert = "INSERT INTO players (nom, photo,id_flag, id_club, position,rating, pace, shooting, passing, dribbling, defending, physical)
-               VALUES ('$name', '$photo', '$flag', '$club','$position', '$rating', '$pace', '$shooting', '$passing', '$dribbling', '$defending', '$physical')";
-        $result = mysqli_query($conn, $sql_insert);
-
-
-        // echo ' form is valid2';
-    }
-}
-
-
-
-
-mysqli_close($conn);
 
 //deletefunction------------------------
 
@@ -141,6 +66,7 @@ if (isset($_POST['delete'])) {
         echo "Error: " . mysqli_error($conn);
     }
 }
+mysqli_close($conn);
 
 
 //------update----------------------------
@@ -235,6 +161,29 @@ if (isset($_POST['delete'])) {
             z-index: 1000;
         }
 
+        .drawarr {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffffff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .drawarr.active {
+            display: block;
+        }
+
+
+
+
         .drawer.active {
             display: block;
         }
@@ -322,6 +271,30 @@ if (isset($_POST['delete'])) {
             transition: background-color 0.3s ease;
         }
 
+        #closemynatione {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        #closemyclub {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
         #closeme:hover {
             background-color: #c0392b;
         }
@@ -350,8 +323,8 @@ if (isset($_POST['delete'])) {
 <body>
     <div class="sidebar">
         <button id="ajouterButton">Add player</button>
-        <button id="">add nation</button>
-        <button id="">add club</button>
+        <button id="ajouternation">add nation</button>
+        <button id="ajouterclub">add club</button>
         <button id="logoutButton">Logout</button>
     </div>
 
@@ -394,10 +367,12 @@ if (isset($_POST['delete'])) {
                         <td><?php echo ($player['defending'])  ?></td>
                         <td><?php echo ($player['physical'])  ?></td>
                         <td>
-                            <form action="dashboard.php" method="POST">
+                            <a href="edit.php?id=<?php echo $player['id'] ?>">edit</a>
+
+                            <!-- <form action="dashboard.php" method="POST">
                                 <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
                                 <input type="submit" name="update" value="update">
-                            </form>
+                            </form> -->
                         </td>
 
                         <td>
@@ -460,6 +435,8 @@ if (isset($_POST['delete'])) {
                                 <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
                                 <input type="submit" name="update" value="update">
                             </form>
+
+
                         </td>
 
                         <td>
@@ -483,10 +460,10 @@ if (isset($_POST['delete'])) {
 
     <div class="drawer" id="formDrawer">
         <button id="closeme">Close</button>
-        <form id="playerForm" action="dashboard.php" method="POST">
+        <form id="playerForm" action="ajouter.php" method="POST">
             <label for="name">Name</label>
 
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name) ?>" placeholder="Player Name">
+            <input type="text" id="name" name="name" value="<?php echo ($name) ?>" placeholder="Player Name">
             <?php if (!empty($errors['name'])): ?>
                 <div class="error"><?php echo $errors['name']; ?></div>
             <?php endif; ?>
@@ -571,19 +548,90 @@ if (isset($_POST['delete'])) {
 
         </form>
     </div>
+    <!-- ----flag---------------  -->
+
+
+    <div class="drawarr" id="formnationDrawer">
+        <button id="closemynatione">Close</button>
+        <form id="playerFormgf" action="dashboard.php" method="POST">
+
+            <label for="">flag name</label>
+            <input type="text">
+
+            <label for="flag">flag URL</label>
+            <input type="url" id="flag" name="flag_url" placeholder="https://example.com/flag.png">
+
+
+
+            <input type="submit" name="submit" value="submit">
+
+        </form>
+    </div>
+
+
+    <!-- ----club------------  -->
+
+    <div class="drawarr" id="formclubDrawer">
+        <button id="closemyclub">Close</button>
+        <form id="playerFormgf" action="dashboard.php" method="POST">
+
+            <label for="">club name</label>
+            <input type="text">
+
+            <label for="club">club URL</label>
+            <input type="url" id="club" name="club_url" placeholder="https://example.com/club.png">
+
+
+
+            <input type="submit" name="submit" value="submit">
+
+        </form>
+    </div>
 
     <script>
         const ajouterButton = document.getElementById('ajouterButton');
         const formDrawer = document.getElementById('formDrawer');
-        const closemeButton = document.getElementById('closeme');
+        const closeme = document.getElementById('closeme');
 
         ajouterButton.addEventListener('click', () => {
             formDrawer.classList.add('active');
         });
 
-        closemeButton.addEventListener('click', () => {
+        closeme.addEventListener('click', () => {
             formDrawer.classList.remove('active');
         });
+
+        //nation---------------
+        const ajouternation = document.getElementById('ajouternation');
+        const formnationDrawer = document.getElementById('formnationDrawer');
+        const closemynatione = document.getElementById('closemynatione');
+
+        ajouternation.addEventListener('click', () => {
+            formnationDrawer.classList.add('active');
+        });
+
+        closemynatione.addEventListener('click', () => {
+            formnationDrawer.classList.remove('active');
+
+        });
+
+
+        //----club------------
+        const ajouterclub = document.getElementById('ajouterclub');
+        const formclubDrawer = document.getElementById('formclubDrawer');
+        const closemyclub = document.getElementById('closemyclub');
+
+        ajouterclub.addEventListener('click', () => {
+            formclubDrawer.classList.add('active');
+        });
+
+        closemyclub.addEventListener('click', () => {
+            formclubDrawer.classList.remove('active');
+
+        });
+
+
+        //log out----------------
 
         const logoutButton = document.getElementById('logoutButton');
         logoutButton.addEventListener('click', () => {
@@ -594,7 +642,7 @@ if (isset($_POST['delete'])) {
         document.getElementById('positionPlayer').addEventListener('change', function() {
             const position = this.value;
 
-             const stats = {
+            const stats = {
                 default: {
                     labels: ["Pace", "Shooting", "Passing", "Dribbling", "Defending", "Physical"],
                     names: ["pace", "shooting", "passing", "dribbling", "defending", "physical"]
@@ -607,7 +655,7 @@ if (isset($_POST['delete'])) {
 
             const selectedStats = stats[position] || stats.default;
 
-             const labelElements = [
+            const labelElements = [
                 document.getElementById('label1'),
                 document.getElementById('label2'),
                 document.getElementById('label3'),

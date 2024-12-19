@@ -17,7 +17,7 @@
 <body>
 
     
-        <button><a href="dashboard.html" style="text-decoration: none; color: white;">Admin</a></button>
+        <button><a href="dashboard.php" style="text-decoration: none; color: white;">Admin</a></button>
     <div class="bigcontainer">
         <h1>Players Formation</h1>
 
