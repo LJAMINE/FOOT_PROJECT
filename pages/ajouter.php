@@ -30,7 +30,7 @@ include("./../pages/config.php");
     }
 
     $position = $_POST['position'];
-    if (array_filter($errors)) {
+    if (array_filter(array: $errors)) {
         // echo 'errors in the form';
 
     } elseif ($position == "GK") {
@@ -78,4 +78,8 @@ include("./../pages/config.php");
 
     header("location:./dashboard.php");
     }
+
+
+
+
 

@@ -18,17 +18,25 @@ $dribbling = "";
 $defending = "";
 $physical = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //show data 
-    if (!isset($_GET['id'])) {
-        header("location:./dashboard.php");
-        exit;
-        // echo 'AMINE';
-    }
 
-    $id = $_GET["id"];
 
-    $sql = "SELECT  id,photo,nom,position,url_club,url_flag,rating,pace,shooting,passing,dribbling,defending,physical
+
+
+$position = $_POST['position'];
+
+if ($position != "GK") {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        //show data 
+        if (!isset($_GET['id'])) {
+            header("location:./dashboard.php");
+            exit;
+            // echo 'AMINE';
+        }
+
+        $id = $_GET["id"];
+
+
+        $sql = "SELECT  id,photo,nom,position,url_club,url_flag,rating,pace,shooting,passing,dribbling,defending,physical
      FROM players
     INNER JOIN club 
 ON players.id_club=club.id_club
@@ -36,53 +44,126 @@ INNER JOIN flag
 ON players.id_flag=flag.id_flag
      WHERE id=$id";
 
-    $result = $conn->query($sql);
+        $result = $conn->query($sql);
 
-    $row = $result->fetch_assoc();
+        $row = $result->fetch_assoc();
 
-    while (!$row) {
-        header("location:./dashboard.php");
-        exit;
-    }
+        while (!$row) {
+            header("location:./dashboard.php");
+            exit;
+        }
 
 
-    $name = $row["nom"];
-    $photo = $row['photo'];
-    $flag = $row['flag'];
-    $club = $row['club'];
-    $position = $row['position'];
-    $rating = $row['rating'];
-    $pace = $row['pace'];
-    $shooting = $row['shooting'];
-    $passing = $row['passing'];
-    $dribbling = $row['dribbling'];
-    $defending = $row['defending'];
-    $physical = $row['physical'];
-} else {
-    //post methd e to update 
+        $name = $row["nom"];
+        $photo = $row['photo'];
+        $flag = $row['flag'];
+        $club = $row['club'];
+        $position = $row['position'];
+        $rating = $row['rating'];
+        $pace = $row['pace'];
+        $shooting = $row['shooting'];
+        $passing = $row['passing'];
+        $dribbling = $row['dribbling'];
+        $defending = $row['defending'];
+        $physical = $row['physical'];
+    } else {
+        //post methd e to update 
 
-    $id = $_POST["id"];
-    $name = $_POST["name"];
-    $flag = $_POST["flag"];
-    $club = $_POST["club"];
-    $position = $_POST["position"];
-    $rating = $_POST["rating"];
-    $pace = $_POST["pace"];
-    $shooting = $_POST["shooting"];
-    $passing = $_POST["passing"];
-    $dribbling = $_POST["dribbling"];
-    $defending = $_POST["defending"];
-    $physical = $_POST["physical"];
+        $id = $_POST["id"];
+        $name = $_POST["name"];
+        $flag = $_POST["flag"];
+        $club = $_POST["club"];
+        $position = $_POST["position"];
+        $rating = $_POST["rating"];
+        $pace = $_POST["pace"];
+        $shooting = $_POST["shooting"];
+        $passing = $_POST["passing"];
+        $dribbling = $_POST["dribbling"];
+        $defending = $_POST["defending"];
+        $physical = $_POST["physical"];
 
-    $sql = "UPDATE players 
+        $sql = "UPDATE players 
           SET nom='$name',photo='$photo', id_flag='$flag', 
             id_club='$club',position='$position',rating='$rating',
           pace='$pace',shooting='$shooting',passing='$passing',
           dribbling='$dribbling', defending='$defending', physical='$physical'
           WHERE id=$id ";
 
-    $result = $conn->query($sql);
-}
+        $result = $conn->query($sql);
+    }
+
+
+
+} else {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+
+        //show data 
+        if (!isset($_GET['id'])) {
+            header("location:./dashboard.php");
+            exit;
+            // echo 'AMINE';
+        }
+
+        $id = $_GET["id"];
+
+
+        $sql = "SELECT  id,photo,nom,position,url_club,url_flag,rating,diving,handling,kicking,reflexes,speed,positioning
+     FROM players
+    INNER JOIN club 
+ON players.id_club=club.id_club
+INNER JOIN flag 
+ON players.id_flag=flag.id_flag
+     WHERE id=$id";
+
+        $result = $conn->query($sql);
+
+        $row = $result->fetch_assoc();
+
+        while (!$row) {
+            header("location:./dashboard.php");
+            exit;
+        }
+
+
+        $name = $row["nom"];
+        $photo = $row['photo'];
+        $flag = $row['flag'];
+        $club = $row['club'];
+        $position = $row['position'];
+        $rating = $row['rating'];
+        $diving = $row['diving'];
+        $handling = $row['handling'];
+        $kicking = $row['kicking'];
+        $reflexes = $row['reflexes'];
+        $speed = $row['speed'];
+        $positioning = $row['positioning'];
+    } else {
+        //post methd e to update 
+
+        $id = $_POST["id"];
+        $name = $_POST["name"];
+        $flag = $_POST["flag"];
+        $club = $_POST["club"];
+        $position = $_POST["position"];
+        $rating = $_POST["rating"];
+        $diving = $_POST["diving"];
+        $handling = $_POST["handling"];
+        $kicking = $_POST["kicking"];
+        $reflexes = $_POST["reflexes"];
+        $speed = $_POST["speed"];
+        $positioning = $_POST["positioning"];
+
+        $sql = "UPDATE players 
+          SET nom='$name',photo='$photo', id_flag='$flag', 
+            id_club='$club',position='$position',rating='$rating',
+          diving='$diving',handling='$handling',kicking='$kicking',
+          reflexes='$reflexes', speed='$speed', positioning='$positioning'
+          WHERE id=$id ";
+
+        $result = $conn->query($sql);
+    }}
+
 
 ?>
 

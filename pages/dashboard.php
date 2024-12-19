@@ -69,7 +69,6 @@ if (isset($_POST['delete'])) {
 mysqli_close($conn);
 
 
-//------update----------------------------
 
 
 
@@ -431,10 +430,10 @@ mysqli_close($conn);
                         <td><?php echo ($player['positioning'])  ?></td>
                         <td>
 
-                            <form action="dashboard.php" method="POST">
-                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
-                                <input type="submit" name="update" value="update">
-                            </form>
+                            <a href="edit.php?id=<?php echo $player['id'] ?>">edit</a>
+
+                            <!-- <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
+                                <input type="submit" name="update" value="update"> -->
 
 
                         </td>
@@ -553,17 +552,17 @@ mysqli_close($conn);
 
     <div class="drawarr" id="formnationDrawer">
         <button id="closemynatione">Close</button>
-        <form id="playerFormgf" action="dashboard.php" method="POST">
+        <form id="playerFormgf" action="aajouteFlag.php" method="POST">
 
             <label for="">flag name</label>
-            <input type="text">
+            <input type="text" name="flagN">
 
             <label for="flag">flag URL</label>
-            <input type="url" id="flag" name="flag_url" placeholder="https://example.com/flag.png">
+            <input type="url" id="flag" name="urlF" placeholder="https://example.com/flag.png">
 
 
 
-            <input type="submit" name="submit" value="submit">
+            <input type="submit" name="submitFlag" value="submit">
 
         </form>
     </div>
@@ -573,17 +572,17 @@ mysqli_close($conn);
 
     <div class="drawarr" id="formclubDrawer">
         <button id="closemyclub">Close</button>
-        <form id="playerFormgf" action="dashboard.php" method="POST">
+        <form id="playerFormgf" action="ajouterclub.php" method="POST">
 
             <label for="">club name</label>
-            <input type="text">
+            <input type="text" name="clubC">
 
             <label for="club">club URL</label>
-            <input type="url" id="club" name="club_url" placeholder="https://example.com/club.png">
+            <input type="url" id="club" name="urlC" placeholder="https://example.com/club.png">
 
 
 
-            <input type="submit" name="submit" value="submit">
+            <input type="submit" name="submitClub" value="submit">
 
         </form>
     </div>
