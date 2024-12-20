@@ -90,8 +90,12 @@ ON players.id_flag=flag.id_flag
           WHERE id=$id ";
 
         $result = $conn->query($sql);
-    }
+        header("location:./dashboard.php");
 
+    }
+    
+
+    // print_r($_GET);
 
 
 } else {
@@ -162,6 +166,8 @@ ON players.id_flag=flag.id_flag
           WHERE id=$id ";
 
         $result = $conn->query($sql);
+        header("location:./dashboard.php");
+
     }}
 
 
@@ -384,14 +390,14 @@ ON players.id_flag=flag.id_flag
 </body>
 
 <script>
-    // const formDrawer = document.getElementById('formDrawer');
-    // const closeme = document.getElementById('closeme');
+    const formDrawer = document.getElementById('formDrawer');
+    const closeme = document.getElementById('closeme');
 
 
 
-    // closeme.addEventListener('click', () => {
-    //     formDrawer.style.display = "none"
-    // });
+    closeme.addEventListener('click', () => {
+        formDrawer.style.display = "none"
+    });
 </script>
 
 </html>

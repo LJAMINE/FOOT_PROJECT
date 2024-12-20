@@ -12,7 +12,7 @@ if (isset($_POST['submitFlag'])) {
 
     $result = mysqli_query($conn, $sqlFlag);
 
-    header("location:./dashboard.php");
+    header("location:./flag_page.php");
 } else {
 
     echo 'error';

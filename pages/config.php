@@ -9,7 +9,7 @@ if (!$conn) {
 ?>
 
 
-<!-- prepare+band good cote sucirite and afterv it execute   =result -->== mysqli query
+<!-- prepare+band good cote sucirite and afterv it execute   =result -->
 
 <!-- connexion and function of assoociative array -->
 

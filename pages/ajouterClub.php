@@ -12,7 +12,7 @@ if (isset($_POST['submitClub'])) {
 
     $result = mysqli_query($conn, $sqlFlag);
 
-    header("location:./dashboard.php");
+    header("location:./club_Page.php");
 } else {
 
     echo 'error';

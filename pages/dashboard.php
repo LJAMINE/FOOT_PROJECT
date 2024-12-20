@@ -1,11 +1,8 @@
 <?php
 
 //connexion 
-$conn = mysqli_connect('localhost', 'amine', 'test123', 'footproject');
-//check the conn
-if (!$conn) {
-    echo 'connection error ' . mysqli_connect_error();
-}
+include("./../pages/config.php");
+
 
 //query for all players
 $sql = 'SELECT id,photo,nom,position,url_club,url_flag,rating,pace,shooting,passing,dribbling,defending,physical
@@ -54,23 +51,11 @@ mysqli_free_result($newresult);
 
 
 
-//deletefunction------------------------
+//delete function------------------------
 
-if (isset($_POST['delete'])) {
-    $id_to_delete = mysqli_real_escape_string($conn, $_POST['id_to_delete']);
-    echo "Deleting ID: $id_to_delete";
-    $sql = "DELETE FROM players WHERE id=$id_to_delete ";
-    if (mysqli_query($conn, $sql)) {
-        echo "Delete successful.";
-    } else {
-        echo "Error: " . mysqli_error($conn);
-    }
-}
-mysqli_close($conn);
+include("./deletePlayers.php");
 
-
-
-
+//delete function------------------------
 
 
 
@@ -82,6 +67,9 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Inter', Arial, sans-serif;
@@ -317,18 +305,19 @@ mysqli_close($conn);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
     </style>
+
 </head>
 
 <body>
     <div class="sidebar">
         <button id="ajouterButton">Add player</button>
-        <button id="ajouternation">add nation</button>
-        <button id="ajouterclub">add club</button>
+        <button id="ajouternation" onclick="window.location.href='flag_Page.php'">nation</button>
+        <button id="ajouterclub" onclick="window.location.href='club_Page.php'">Club</button>
         <button id="logoutButton">Logout</button>
     </div>
 
     <div class="content">
-        <h1>Welcome to the Admin Dashboard</h1>
+        <h1>Players Data</h1>
 
         <!-- <h2>Players Table</h2> -->
         <table>
@@ -365,21 +354,30 @@ mysqli_close($conn);
                         <td><?php echo ($player['dribbling'])  ?></td>
                         <td><?php echo ($player['defending'])  ?></td>
                         <td><?php echo ($player['physical'])  ?></td>
-                        <td>
-                            <a href="edit.php?id=<?php echo $player['id'] ?>">edit</a>
+                        <!-- <td> -->
+                        <!-- <a href="edit.php?id=<?php echo $player['id'] ?>">edit</a> -->
 
-                            <!-- <form action="dashboard.php" method="POST">
+                        <!-- <form action="dashboard.php" method="POST">
                                 <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
                                 <input type="submit" name="update" value="update">
                             </form> -->
+                        <!-- </td> -->
+                        <td>
+                            <a href="edit.php?id=<?php echo $player['id']; ?>" style="text-decoration: none; color: inherit;">
+                                <i class="fa-solid fa-pen-to-square" style="color: blue;"></i>
+                            </a>
                         </td>
+
 
                         <td>
                             <form action="dashboard.php" method="POST">
-                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
-                                <input type="submit" name="delete" value="delete">
+                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id']; ?>">
+                                <button type="submit" name="delete" style="border: none; background: none; cursor: pointer;">
+                                    <i class="fa-solid fa-trash" style="color: red;"></i>
+                                </button>
                             </form>
                         </td>
+
 
 
 
@@ -428,22 +426,31 @@ mysqli_close($conn);
                         <td><?php echo ($player['reflexes'])  ?></td>
                         <td><?php echo ($player['speed'])  ?></td>
                         <td><?php echo ($player['positioning'])  ?></td>
-                        <td>
+                        <!-- <td> -->
 
-                            <a href="edit.php?id=<?php echo $player['id'] ?>">edit</a>
+                        <!-- <a href="edit.php?id=<?php echo $player['id'] ?>">edit</a> -->
 
-                            <!-- <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
+                        <!-- <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
                                 <input type="submit" name="update" value="update"> -->
 
 
+                        <!-- </td> -->
+                        <td>
+                            <a href="edit.php?id=<?php echo $player['id']; ?>" style="text-decoration: none; color: inherit;">
+                                <i class="fa-solid fa-pen-to-square" style="color: blue;"></i>
+                            </a>
                         </td>
+
 
                         <td>
                             <form action="dashboard.php" method="POST">
-                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id'] ?>">
-                                <input type="submit" name="delete" value="delete">
+                                <input type="hidden" name="id_to_delete" value="<?php echo $player['id']; ?>">
+                                <button type="submit" name="delete" style="border: none; background: none; cursor: pointer;">
+                                    <i class="fa-solid fa-trash" style="color: red;"></i>
+                                </button>
                             </form>
                         </td>
+
 
 
 
@@ -462,7 +469,7 @@ mysqli_close($conn);
         <form id="playerForm" action="ajouter.php" method="POST">
             <label for="name">Name</label>
 
-            <input type="text" id="name" name="name" value="<?php echo ($name) ?>" placeholder="Player Name">
+            <input type="text" id="name" name="name" placeholder="Player Name">
             <?php if (!empty($errors['name'])): ?>
                 <div class="error"><?php echo $errors['name']; ?></div>
             <?php endif; ?>
@@ -504,7 +511,7 @@ mysqli_close($conn);
             </select>
 
             <label for="rating">Rating</label>
-            <input type="number" id="rating" name="rating" value="<?php echo $rating ?>" placeholder="Overall Rating">
+            <input type="number" id="rating" name="rating" placeholder="Overall Rating">
 
             <label for="positionPlayer">Position:</label>
             <select id="positionPlayer" name="position">
@@ -570,7 +577,7 @@ mysqli_close($conn);
 
     <!-- ----club------------  -->
 
-    <div class="drawarr" id="formclubDrawer">
+    <!-- <div class="drawarr" id="formclubDrawer">
         <button id="closemyclub">Close</button>
         <form id="playerFormgf" action="ajouterclub.php" method="POST">
 
@@ -585,7 +592,7 @@ mysqli_close($conn);
             <input type="submit" name="submitClub" value="submit">
 
         </form>
-    </div>
+    </div> -->
 
     <script>
         const ajouterButton = document.getElementById('ajouterButton');
@@ -601,40 +608,40 @@ mysqli_close($conn);
         });
 
         //nation---------------
-        const ajouternation = document.getElementById('ajouternation');
-        const formnationDrawer = document.getElementById('formnationDrawer');
-        const closemynatione = document.getElementById('closemynatione');
+        // const ajouternation = document.getElementById('ajouternation');
+        // const formnationDrawer = document.getElementById('formnationDrawer');
+        // const closemynatione = document.getElementById('closemynatione');
 
-        ajouternation.addEventListener('click', () => {
-            formnationDrawer.classList.add('active');
-        });
+        // ajouternation.addEventListener('click', () => {
+        //     formnationDrawer.classList.add('active');
+        // });
 
-        closemynatione.addEventListener('click', () => {
-            formnationDrawer.classList.remove('active');
+        // closemynatione.addEventListener('click', () => {
+        //     formnationDrawer.classList.remove('active');
 
-        });
+        // });
 
 
         //----club------------
-        const ajouterclub = document.getElementById('ajouterclub');
-        const formclubDrawer = document.getElementById('formclubDrawer');
-        const closemyclub = document.getElementById('closemyclub');
+        // const ajouterclub = document.getElementById('ajouterclub');
+        // const formclubDrawer = document.getElementById('formclubDrawer');
+        // const closemyclub = document.getElementById('closemyclub');
 
-        ajouterclub.addEventListener('click', () => {
-            formclubDrawer.classList.add('active');
-        });
+        // ajouterclub.addEventListener('click', () => {
+        //     formclubDrawer.classList.add('active');
+        // });
 
-        closemyclub.addEventListener('click', () => {
-            formclubDrawer.classList.remove('active');
+        // closemyclub.addEventListener('click', () => {
+        //     formclubDrawer.classList.remove('active');
 
-        });
+        // });
 
 
         //log out----------------
 
         const logoutButton = document.getElementById('logoutButton');
         logoutButton.addEventListener('click', () => {
-            window.location.href = 'index.html';
+            window.location.href = 'index.php';
         });
 
 
