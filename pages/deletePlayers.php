@@ -6,7 +6,7 @@ if (isset($_POST['delete'])) {
     echo "Deleting ID: $id_to_delete";
     $sql = "DELETE FROM players WHERE id=$id_to_delete ";
     if (mysqli_query($conn, $sql)) {
-        echo "Delete successful.";
+        echo "Delete successful.";// it works ?
         header("location:./dashboard.php");
 
     } else {

@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     print_r($row);
 
 
-    while (!$row) {
+    while (!$row) {// ca mérite pas d'etre dans une boucle ! 
         header("location:./club_Page.php");
         exit;
     }
