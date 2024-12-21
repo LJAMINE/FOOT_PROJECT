@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     //show data 
     if (!isset($_GET['id_flag'])) {
         header("location:./flag_page.php");
-        exit;
+        exit;// qu'il est l'utilité de exit ici ?
         // echo 'AMINE';
     }
 

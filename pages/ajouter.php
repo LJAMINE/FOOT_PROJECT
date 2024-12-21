@@ -30,7 +30,7 @@ include("./../pages/config.php");
     }
 
     $position = $_POST['position'];
-    if (array_filter(array: $errors)) {
+    if (array_filter(array: $errors)) {// qu'il est l'utilité de ce code ?
         // echo 'errors in the form';
 
     } elseif ($position == "GK") {
